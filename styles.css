@@ -1,0 +1,7 @@
+/* Import Geist Sans font */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap');
+
+/* Apply Geist Sans as the default font */
+body {
+  font-family: 'Geist', sans-serif;
+}
