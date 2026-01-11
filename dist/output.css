@@ -309,8 +309,14 @@
   .right-80 {
     right: calc(var(--spacing) * 80);
   }
+  .-bottom-38 {
+    bottom: calc(var(--spacing) * -38);
+  }
   .-bottom-48 {
     bottom: calc(var(--spacing) * -48);
+  }
+  .-bottom-58 {
+    bottom: calc(var(--spacing) * -58);
   }
   .-bottom-148 {
     bottom: calc(var(--spacing) * -148);
@@ -327,11 +333,17 @@
   .bottom-2 {
     bottom: calc(var(--spacing) * 2);
   }
+  .bottom-5 {
+    bottom: calc(var(--spacing) * 5);
+  }
   .bottom-8 {
     bottom: calc(var(--spacing) * 8);
   }
   .bottom-10 {
     bottom: calc(var(--spacing) * 10);
+  }
+  .bottom-15 {
+    bottom: calc(var(--spacing) * 15);
   }
   .bottom-20 {
     bottom: calc(var(--spacing) * 20);
@@ -348,6 +360,9 @@
   .bottom-40 {
     bottom: calc(var(--spacing) * 40);
   }
+  .bottom-42 {
+    bottom: calc(var(--spacing) * 42);
+  }
   .bottom-48 {
     bottom: calc(var(--spacing) * 48);
   }
@@ -362,6 +377,9 @@
   }
   .bottom-58 {
     bottom: calc(var(--spacing) * 58);
+  }
+  .bottom-62 {
+    bottom: calc(var(--spacing) * 62);
   }
   .bottom-80 {
     bottom: calc(var(--spacing) * 80);
@@ -1153,6 +1171,9 @@
   }
   .pb-14 {
     padding-bottom: calc(var(--spacing) * 14);
+  }
+  .pb-15 {
+    padding-bottom: calc(var(--spacing) * 15);
   }
   .pb-20 {
     padding-bottom: calc(var(--spacing) * 20);
