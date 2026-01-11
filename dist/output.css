@@ -13,6 +13,8 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --text-sm: 0.875rem;
+    --text-sm--line-height: calc(1.25 / 0.875);
     --text-lg: 1.125rem;
     --text-lg--line-height: calc(1.75 / 1.125);
     --text-xl: 1.25rem;
@@ -264,6 +266,9 @@
   }
   .-bottom-148 {
     bottom: calc(var(--spacing) * -148);
+  }
+  .bottom-1 {
+    bottom: calc(var(--spacing) * 1);
   }
   .bottom-1\.5 {
     bottom: calc(var(--spacing) * 1.5);
@@ -598,6 +603,9 @@
   .w-120 {
     width: calc(var(--spacing) * 120);
   }
+  .w-180 {
+    width: calc(var(--spacing) * 180);
+  }
   .w-200 {
     width: calc(var(--spacing) * 200);
   }
@@ -606,6 +614,9 @@
   }
   .w-260 {
     width: calc(var(--spacing) * 260);
+  }
+  .w-265 {
+    width: calc(var(--spacing) * 265);
   }
   .w-360 {
     width: calc(var(--spacing) * 360);
@@ -717,6 +728,9 @@
   }
   .justify-start {
     justify-content: flex-start;
+  }
+  .gap-1 {
+    gap: calc(var(--spacing) * 1);
   }
   .gap-2 {
     gap: calc(var(--spacing) * 2);
@@ -1214,6 +1228,10 @@
   .text-lg {
     font-size: var(--text-lg);
     line-height: var(--tw-leading, var(--text-lg--line-height));
+  }
+  .text-sm {
+    font-size: var(--text-sm);
+    line-height: var(--tw-leading, var(--text-sm--line-height));
   }
   .text-xl {
     font-size: var(--text-xl);
