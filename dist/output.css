@@ -203,6 +203,12 @@
   .inset-100 {
     inset: calc(var(--spacing) * 100);
   }
+  .top-28 {
+    top: calc(var(--spacing) * 28);
+  }
+  .top-48 {
+    top: calc(var(--spacing) * 48);
+  }
   .top-50 {
     top: calc(var(--spacing) * 50);
   }
@@ -221,6 +227,12 @@
   .right-80 {
     right: calc(var(--spacing) * 80);
   }
+  .-bottom-48 {
+    bottom: calc(var(--spacing) * -48);
+  }
+  .-bottom-148 {
+    bottom: calc(var(--spacing) * -148);
+  }
   .bottom-8 {
     bottom: calc(var(--spacing) * 8);
   }
@@ -229,6 +241,9 @@
   }
   .bottom-20 {
     bottom: calc(var(--spacing) * 20);
+  }
+  .bottom-28 {
+    bottom: calc(var(--spacing) * 28);
   }
   .bottom-30 {
     bottom: calc(var(--spacing) * 30);
@@ -239,8 +254,20 @@
   .bottom-40 {
     bottom: calc(var(--spacing) * 40);
   }
+  .bottom-48 {
+    bottom: calc(var(--spacing) * 48);
+  }
   .bottom-50 {
     bottom: calc(var(--spacing) * 50);
+  }
+  .bottom-52 {
+    bottom: calc(var(--spacing) * 52);
+  }
+  .bottom-54 {
+    bottom: calc(var(--spacing) * 54);
+  }
+  .bottom-58 {
+    bottom: calc(var(--spacing) * 58);
   }
   .bottom-80 {
     bottom: calc(var(--spacing) * 80);
