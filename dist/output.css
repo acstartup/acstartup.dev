@@ -222,11 +222,56 @@
   .top-28 {
     top: calc(var(--spacing) * 28);
   }
+  .top-40 {
+    top: calc(var(--spacing) * 40);
+  }
   .top-48 {
     top: calc(var(--spacing) * 48);
   }
   .top-50 {
     top: calc(var(--spacing) * 50);
+  }
+  .top-60 {
+    top: calc(var(--spacing) * 60);
+  }
+  .top-70 {
+    top: calc(var(--spacing) * 70);
+  }
+  .top-80 {
+    top: calc(var(--spacing) * 80);
+  }
+  .top-88 {
+    top: calc(var(--spacing) * 88);
+  }
+  .top-90 {
+    top: calc(var(--spacing) * 90);
+  }
+  .top-92 {
+    top: calc(var(--spacing) * 92);
+  }
+  .top-95 {
+    top: calc(var(--spacing) * 95);
+  }
+  .top-100 {
+    top: calc(var(--spacing) * 100);
+  }
+  .top-120 {
+    top: calc(var(--spacing) * 120);
+  }
+  .top-122 {
+    top: calc(var(--spacing) * 122);
+  }
+  .top-123 {
+    top: calc(var(--spacing) * 123);
+  }
+  .top-125 {
+    top: calc(var(--spacing) * 125);
+  }
+  .right-0\.5 {
+    right: calc(var(--spacing) * 0.5);
+  }
+  .right-0\.25 {
+    right: calc(var(--spacing) * 0.25);
   }
   .right-1 {
     right: calc(var(--spacing) * 1);
@@ -405,6 +450,12 @@
   .z-21 {
     z-index: 21;
   }
+  .z-25 {
+    z-index: 25;
+  }
+  .z-30 {
+    z-index: 30;
+  }
   .-mb-2 {
     margin-bottom: calc(var(--spacing) * -2);
   }
@@ -473,6 +524,12 @@
   }
   .h-9 {
     height: calc(var(--spacing) * 9);
+  }
+  .h-9\.5 {
+    height: calc(var(--spacing) * 9.5);
+  }
+  .h-9\.75 {
+    height: calc(var(--spacing) * 9.75);
   }
   .h-10 {
     height: calc(var(--spacing) * 10);
@@ -1022,6 +1079,9 @@
   .pt-12 {
     padding-top: calc(var(--spacing) * 12);
   }
+  .pt-14 {
+    padding-top: calc(var(--spacing) * 14);
+  }
   .pt-15 {
     padding-top: calc(var(--spacing) * 15);
   }
@@ -1100,8 +1160,14 @@
   .pb-100 {
     padding-bottom: calc(var(--spacing) * 100);
   }
+  .pl-1\.75 {
+    padding-left: calc(var(--spacing) * 1.75);
+  }
   .pl-2 {
     padding-left: calc(var(--spacing) * 2);
+  }
+  .pl-2\.25 {
+    padding-left: calc(var(--spacing) * 2.25);
   }
   .pl-4 {
     padding-left: calc(var(--spacing) * 4);
