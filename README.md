@@ -1,6 +1,6 @@
-# acstartup.dev - Portfolio Website
+# acstartup.dev
 
-A modern, responsive personal portfolio website built with Tailwind CSS showcasing projects, experience, and contact information for a full-stack engineer.
+My personal portfolio website built with Tailwind CSS showcasing projects, experience, and contact information.
 
 ## Features
 - Custom Geist Sans typography for modern aesthetic
