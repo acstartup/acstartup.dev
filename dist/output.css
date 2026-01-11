@@ -459,6 +459,9 @@
   .h-1 {
     height: calc(var(--spacing) * 1);
   }
+  .h-5 {
+    height: calc(var(--spacing) * 5);
+  }
   .h-6 {
     height: calc(var(--spacing) * 6);
   }
@@ -1147,6 +1150,12 @@
   }
   .pl-32 {
     padding-left: calc(var(--spacing) * 32);
+  }
+  .pl-35 {
+    padding-left: calc(var(--spacing) * 35);
+  }
+  .pl-45 {
+    padding-left: calc(var(--spacing) * 45);
   }
   .pl-50 {
     padding-left: calc(var(--spacing) * 50);
