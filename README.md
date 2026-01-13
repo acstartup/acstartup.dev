@@ -1,6 +1,6 @@
 # acstartup.dev
 
-My personal portfolio website built with Tailwind CSS showcasing projects, experience, and contact information.
+My personal portfolio website built with HTML & Tailwind CSS showcasing projects, experience, and contact information.
 
 ## Features
 - Custom Geist Sans typography for modern aesthetic
