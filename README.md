@@ -1,6 +1,6 @@
 # acstartup.dev
 
-My personal portfolio website built with Tailwind CSS showcasing projects, experience, and contact information.
+My personal portfolio website built with HTML & Tailwind CSS showcasing projects, experience, and contact information.
 
 ## Features
 - Custom Geist Sans typography for modern aesthetic
@@ -91,6 +91,8 @@ acstartup.dev/
 - `justify-between` and `items-baseline` for different texts on same line
 - `italics` and `underline`
 - using `geist-sans` font with `font-light, font-semibold, etc...`
+- `lg:` for tailwindcss large graphics (desktop, laptop, etc...) only, must have a normal `top-20` and then a `lg: top-80` for MOBILE
+- `text-base` is `medium` in tailwindcss
 
 ## Available Scripts
 
