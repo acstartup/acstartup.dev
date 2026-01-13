@@ -91,6 +91,7 @@ acstartup.dev/
 - `justify-between` and `items-baseline` for different texts on same line
 - `italics` and `underline`
 - using `geist-sans` font with `font-light, font-semibold, etc...`
+- `lg:` for tailwindcss large graphics (desktop, laptop, etc...) only, must have a normal `top-20` and then a `lg: top-80` for MOBILE
 
 ## Available Scripts
 
