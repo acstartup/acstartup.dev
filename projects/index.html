@@ -11,8 +11,8 @@
         <div class="grid z-20 bg-white/90 w-full h-10"> <!-- notice -->
             <h1 class="flex relative justify-center py-2 left-0.75 font-bold"> 🚨 Seeking SWE internship (now till end of Summer 2026) wanting to learn fast, work long hours, and go all-in.</h1>
         </div>
-        <div class="grid z-20 place-items-center pt-6"> <!-- header -->
-            <div class="flex relative border-2 gap-10 shadow-sm shadow-white/30 pb-2.5 justify-start pt-3 h-12 items-center border-black/40 bg-black/20 rounded-lg w-260">
+        <div class="grid z-20 place-items-center pt-6 px-8 lg:px-0"> <!-- header -->
+            <div class="flex relative border-2 gap-10 shadow-sm shadow-white/30 pb-2.5 justify-start pt-3 h-12 items-center border-black/40 bg-black/20 rounded-lg w-full max-w-[calc(100vw-4rem)] lg:w-260 lg:max-w-none">
                 <a href="/">
                     <img src="/files/acstartup.dev.fill.png" alt="acstartup.dev"
                     class="inline-block px-8 w-auto h-6 object-contain hover:opacity-80"
@@ -24,11 +24,11 @@
             </div>
         </div>
 
-        <div class="grid relative justify-center top-8"> <!-- project header -->
+        <div class="grid relative justify-center top-8 px-8 pt-5 lg:pt-0 lg:px-0"> <!-- project header -->
             <h1 class="text-white font-bold text-3xl">Projects</h1>
-            <h2 class="text-white font-light text-lg pt-2">Below are selected projects I’ve worked on. For the most up-to-date builds and source code, please visit my <a href="https://github.com/acstartup" class="font-bold underline hover:text-white/70">GitHub →</a></h2>
-            
-            <div class="w-250"> <!-- TaintMonkey -->
+            <h2 class="text-white font-light text-lg pt-2">Below are selected projects I've worked on. For the most up-to-date builds and source code, please visit my <a href="https://github.com/acstartup" class="font-bold underline hover:text-white/70">GitHub →</a></h2>
+
+            <div class="w-full max-w-[calc(100vw-4rem)] lg:w-250 lg:max-w-none"> <!-- TaintMonkey -->
                 <div class="flex justify-between items-baseline gap-12 pt-10">
                     <h1 class="text-white font-semibold text-lg">TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching</h1>
                     <h2 class="text-white italic text-normal whitespace-nowrap pl-2">Jul 2025 - Oct 2025</h2>
@@ -44,7 +44,7 @@
                         <h1 class="text-white text-normal underline hover:text-white/70">bliutech/taintmonkey</h1>
                     </a>
                 </div>
-                <div class="text-white font-light w-250 pt-2">
+                <div class="text-white font-light w-full pt-2">
                     <h1>TaintMonkey is a dynamic taint analysis library for Python Flask apps that uses monkey patching to instrument endpoints without changing source code. It includes a built-in fuzzer and plugin workflow to generate randomized inputs and detect vulnerabilities when tainted data reaches dangerous sinks without proper sanitization. The repo also ships with JungleGym, a dataset of 100+ intentionally vulnerable Flask apps mapped to CWE categories for testing and experiments.</h1>
                     <h1 class="pt-3 pb-3">As a researcher, I programmed 32 of the 118 JungleGym test applications and built the corresponding vulnerability plugins. I added JSON-input tainting support to TaintMonkey, fixed major GitHub issues affecting data-flow tracking, and contributed to debugging and core architectural decisions. I also wrote the Experimental Procedures section of our research paper, designed all research figures in Figma, formatted the manuscript in Overleaf, and created the 13-slide deck presented at MIT Undergraduate Research Techology Conference (URTC) 2025. Throughout the project, I coordinated deadlines, kept the team on pace, and actively incorporated feedback to improve the research.</h1>
                     <a href="https://drive.google.com/file/d/1Ms2BYNvVhQDD8NlQHi5p1bmDooO6XeGi/view?usp=sharing" class="underline font-normal hover:text-white/70">MIT URTC 2025 IEEE Xplore Publication →</a> <!-- ended off working on href for MIT version -->
@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <div class="grid relative items-center pb-20 z-20 top-88"> <!-- footer -->
+        <div class="grid relative items-center pb-20 z-20 top-240 lg:top-88"> <!-- footer -->
             <h1 class="text-white flex items-center justify-center gap-2 font-normal">
                 <a href="https://acstartup.dev/" class="underline hover:text-white/70">acstartup.dev</a>
                 is hosted on
