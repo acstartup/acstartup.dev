@@ -10,10 +10,6 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
-    --text-xs: 0.75rem;
-    --text-xs--line-height: calc(1 / 0.75);
-    --text-sm: 0.875rem;
-    --text-sm--line-height: calc(1.25 / 0.875);
     --text-base: 1rem;
     --text-base--line-height: calc(1.5 / 1);
     --text-lg: 1.125rem;
@@ -219,12 +215,6 @@
   }
   .right-0\.5 {
     right: calc(var(--spacing) * 0.5);
-  }
-  .right-3 {
-    right: calc(var(--spacing) * 3);
-  }
-  .right-20 {
-    right: calc(var(--spacing) * 20);
   }
   .-bottom-60 {
     bottom: calc(var(--spacing) * -60);
@@ -463,9 +453,6 @@
   }
   .pl-3 {
     padding-left: calc(var(--spacing) * 3);
-  }
-  .pl-10 {
-    padding-left: calc(var(--spacing) * 10);
   }
   .pl-15 {
     padding-left: calc(var(--spacing) * 15);
@@ -725,11 +712,6 @@
   .lg\:pb-0 {
     @media (width >= 64rem) {
       padding-bottom: calc(var(--spacing) * 0);
-    }
-  }
-  .lg\:pl-0 {
-    @media (width >= 64rem) {
-      padding-left: calc(var(--spacing) * 0);
     }
   }
   .lg\:pl-31 {
