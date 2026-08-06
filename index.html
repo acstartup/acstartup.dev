@@ -1,97 +1,377 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta view="viewport" width="width-devicewidth, initial-scale=1.0">
-    <title>Home | acstartup.dev</title>
-    <link rel="icon" type="image/svg+xml" href="/files/ac.dev.svg">
-    <link href="/dist/output.css" rel="stylesheet">
-    <link href="/styles.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aiden Chen</title>
+<link rel="icon" type="image/svg+xml" href="/files/ac.dev.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a09;
+    --bg-elevated:#131311;
+    --line:#2a2a24;
+    --text:#e9e7de;
+    --muted:#8c897c;
+    --accent:#f2f1ea;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
+
+  .grid-bg{
+    position:fixed; inset:0; z-index:0;
+    background: radial-gradient(ellipse 60% 45% at 50% 10%, rgba(242,241,234,0.06), transparent 70%);
+  }
+
+  header{
+    position:relative; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 56px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to bottom, rgba(10,10,9,0.9), rgba(10,10,9,0.6));
+    backdrop-filter:blur(6px);
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.05rem; font-weight:600; letter-spacing:0.02em;
+    color:var(--text); text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo::before{
+    content:"";
+    width:8px; height:8px; border-radius:1px;
+    background:var(--accent);
+    box-shadow:0 0 8px var(--accent);
+  }
+  nav{ display:flex; gap:48px; }
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem;
+    font-weight:400;
+    position:relative;
+    padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0%; height:1px;
+    background:var(--accent);
+    transition:width .25s ease;
+  }
+  nav a:hover{ color:var(--text); }
+  nav a:hover::after{ width:100%; }
+
+  main{ position:relative; z-index:10; }
+
+  .hero{
+    max-width:1180px;
+    margin:0 auto;
+    padding:120px 56px 140px;
+    display:grid;
+    grid-template-columns:340px 1fr;
+    gap:80px;
+    align-items:center;
+  }
+
+  .frame{
+    position:relative;
+    width:105%; aspect-ratio:1/1;
+    opacity:0; transform:translateY(16px);
+    animation: rise .8s ease forwards .1s;
+  }
+  .frame-inner{
+    position:absolute; inset:14px;
+    background:var(--bg-elevated);
+    border:1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  }
+  .frame-inner img{
+    width:100%; height:100%; object-fit:cover;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    filter:grayscale(35%) contrast(1.05);
+  }
+
+  @keyframes rise{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .about{ min-width:0; }
+  .eyebrow{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.85rem; letter-spacing:0.08em;
+    color:var(--muted); text-transform:uppercase;
+    margin:0 0 14px;
+    opacity:0; transform:translateY(10px);
+    animation: rise .6s ease forwards .2s;
+  }
+  
+  /* Updated h1 for typing effect */
+  h1{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-weight:500;
+    font-size:clamp(2.2rem, 4vw, 3.4rem);
+    letter-spacing:-0.01em;
+    margin:0 0 22px;
+    min-height:1.2em;
+    display:inline-block;
+    border-right:3px solid var(--accent);
+    padding-right:4px;
+    animation: blink 0.8s step-end infinite;
+  }
+  
+  @keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: var(--accent); }
+  }
+
+  .quote-line{
+    min-height:1.6em;
+    border-left:2px solid var(--line);
+    padding-left:18px;
+    color:var(--muted);
+    font-style:italic;
+    margin-bottom:28px;
+    opacity:0; transform:translateY(10px);
+    animation: rise .6s ease forwards .44s;
+  }
+
+  .bio{
+    min-height:2.4em;
+    color:var(--text);
+    font-size:1rem;
+    line-height:1.75;
+    max-width:56ch;
+    margin-bottom:14px;
+    opacity:0; transform:translateY(10px);
+    animation: rise .6s ease forwards .56s;
+  }
+  .bio + .bio{
+    color:var(--muted);
+    font-size:0.95rem;
+    animation-delay:.66s;
+  }
+
+  .status{
+    display:flex; align-items:center; gap:10px;
+    margin:34px 0 30px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem;
+    color:var(--muted);
+    opacity:0; transform:translateY(10px);
+    animation: rise .6s ease forwards .78s;
+  }
+  .status .dot{
+    width:8px; height:8px; border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 8px var(--accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{ opacity:1; }
+    50%{ opacity:.35; }
+  }
+
+  .socials{
+    display:flex; gap:18px;
+    opacity:0; transform:translateY(10px);
+    animation: rise .6s ease forwards .9s;
+  }
+  .socials a{
+    display:inline-flex; align-items:center; justify-content:center;
+    width:44px; height:44px;
+    border:1px solid var(--line);
+    background:var(--bg-elevated);
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .socials a:hover{
+    border-color:var(--accent);
+    transform:translateY(-3px);
+  }
+  .socials img{
+    width:20px; height:20px; object-fit:contain;
+    filter:invert(92%) sepia(6%) saturate(200%);
+  }
+
+  /* below-fold reveal sections */
+  .reveal{
+    max-width:1180px; margin:0 auto;
+    padding:0 56px 120px;
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:24px;
+  }
+  .panel{
+    border:1px solid var(--line);
+    background:var(--bg-elevated);
+    padding:32px;
+    opacity:0; transform:translateY(24px);
+    transition:opacity .7s ease, transform .7s ease;
+  }
+  .panel.in-view{ opacity:1; transform:translateY(0); }
+  .panel .label{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:1rem; font-weight:500;
+    color:var(--text);
+    margin-bottom:12px;
+  }
+  .panel .teaser{
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem; color:var(--muted);
+    line-height:1.5; margin:0;
+  }
+  .panel a.go{
+    display:inline-block; margin-top:18px;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.9rem; color:var(--muted);
+    text-decoration:none; border-bottom:1px solid var(--line);
+    transition:color .2s ease, border-color .2s ease;
+  }
+  .panel a.go:hover{ color:var(--text); border-color:var(--accent); }
+
+  footer{
+    position:relative; z-index:10;
+    border-top:1px solid var(--line);
+    padding:26px 56px;
+    display:flex; justify-content:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.85rem; color:var(--muted);
+  }
+  footer a{ color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--line); }
+  footer a:hover{ color:var(--accent); border-color:var(--accent); }
+
+  @media (max-width: 900px){
+    header{ padding:22px 24px; }
+    nav{ gap:24px; }
+    .hero{ grid-template-columns:1fr; padding:80px 24px 90px; text-align:left; }
+    .frame{ max-width:280px; }
+    .reveal{ grid-template-columns:1fr; padding:0 24px 90px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
-<body class="bg-black/75">
-    <div
-        class="fixed inset-0 z-0 w-full min-h-screen bg-cover bg-center opacity-20"
-        style="background-image: url('/files/main.png');"
-    ></div>
-        <div class="relative grid z-20 bg-white/90 w-full h-10"> <!-- notice -->
-            <h1 class="flex justify-center py-2 pl-1.75 font-bold">🚨 Seeking SWE internship (now → end of Summer 2026) wanting to learn fast, work long hours, and go all-in.</h1>
-        </div>
-        <div class="grid z-20 place-items-center pt-6 px-8 lg:px-0"> <!-- header -->
-            <div class="flex relative border-2 gap-10 shadow-sm shadow-white/30 pb-2.5 justify-start pt-3 h-12 items-center border-black/40 bg-black/20 rounded-lg w-full max-w-[calc(100vw-4rem)] lg:w-260 lg:max-w-none">
-                <a href="/">
-                    <img src="/files/acstartup.dev.fill.png" alt="acstartup.dev"
-                    class="inline-block px-8 w-auto h-6 object-contain hover:opacity-80"
-                    ></img>
-                </a>
-                <a href="/projects" class="font-light pl-15 lg:pl-31 text-white/70 text-xl lg:text-base hover:text-white">Projects</a>
-                <a href="/experience" class="font-light text-white/70 text-xl lg:text-base hover:text-white">Experience</a>
-                <a href="/contact" class="font-light text-white/70 text-xl lg:text-base hover:text-white">Contacts</a>
-            </div>
+<body>
 
-            <div class="flex relative z-20 justify-center lg:justify-start lg:-bottom-38 lg:right-60 mt-8 pt-20 pb-20 lg:mt-0 lg:pt-0 lg:pb-0"> <!-- image -->
-                <div class="bg-white w-170 h-170 lg:w-100 lg:h-100 rounded-full overflow-hidden">
-                    <img src="/files/aura.jpg" alt="profile image" class="w-full h-full scale-100 object-cover"></img>
-                </div>
-            </div>
+<div class="grid-bg"></div>
 
-            <div class="grid relative bottom-5 lg:bottom-68 lg:left-66 w-full max-w-[calc(100vw-4rem)] pl-3 lg:w-120 z-20 lg:px-0 mt-8 lg:mt-0 lg:max-w-none"> <!-- about me -->
-                <h1 class="font-extrabold text-5xl lg:text-4xl text-white">Hi, I'm Aiden Chen!</h1>
-                <h2 class="font-semibold text-2xl lg:text-base text-white">"Ideas are only thrilling when they're deemed impossible." - Me</h2>
-                <h3 class="font-light text-2xl lg:text-lg text-white pt-5">I'm a full-stack engineer and senior at Clearview Regional High School obsessed with startups and first-principle thinking (questioning everything...) especially using automation and simplicity to modernize outdated, legacy industries. I ship rapidly, learn relentless, and love urforgiving pressure, long hours, and attempting the impossible. </h3>
-                <h3 class="font-light text-xl lg:text-base text-white pt-4">I also love endurance training(running, biking, swimming), photography/videography, and weight-lifting for the grit, discipline, and storytelling lens required.</h3>
-                <h3 class="font-normal text-xl lg:text-base text-white pt-4">Currently: 🔓 Looking for summer internship!</h3>
-            <div class="gap-3 pt-8 lg:pt-3">
-                <a
-                    href="mailto:aidenchen.contact@gmail.com"
-                    class="inline-block hover:opacity-80">
-                    <img
-                    src="/files/gmail.png" alt="gmail"
-                    class="h-30 lg:h-10 w-auto object-contain"
-                    ></img>
-                </a>
-                <a
-                    href="https://www.linkedin.com/in/acstartup/"
-                    class="inline-block hover:opacity-80">
-                    <img
-                    src="/files/linkedin.png" alt="linkedin"
-                    class="h-30 lg:h-10 w-auto object-contain"
-                    ></img>
-                </a>
-                <a
-                    href="https://github.com/acstartup"
-                    class="inline-block hover:opacity-80">
-                    <img 
-                    src="/files/github.png" alt="linkedin"
-                    class="h-30 lg:h-10 w-auto object-contain"
-                    ></img>
-                </a>
-                <a
-                    href="https://x.com/aidencstartup"
-                    class="inline-block hover:opacity-80">
-                    <img 
-                    src="/files/x.png" alt="linkedin"
-                    class="h-30 lg:h-10 w-auto object-contain"
-                    ></img>
-                </a>
-            </div>
+<header>
+  <a href="/" class="logo">acstartup.dev</a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="projects/">Projects</a>
+    <a href="experience/">Experience</a>
+    <a href="contact/">Contact Me</a>
+  </nav>
+</header>
 
-            </div>
+<main>
+  <section class="hero">
+    <div class="frame">
+      <div class="frame-inner">
+        <img src="files/aura.jpg" alt="Aiden Chen">
+      </div>
+    </div>
 
-            <div class="grid relative items-center pb-20 z-20 -bottom-60 lg:bottom-5"> <!-- footer -->
-                <h1 class="text-white flex items-center justify-center gap-2 font-normal text-2xl lg:text-lg">
-                    <a href="https://acstartup.dev/" class="underline text-2xl lg:text-lg hover:text-white/70">acstartup.dev</a>
-                    is hosted on
-                    <a
-                        href="https://github.com/acstartup/acstartup.dev"
-                        class="flex items-center gap-1 hover:opacity-80">
-                        <img
-                        src="/files/github.png" alt="github"
-                        class="h-15 lg:h-8 w-auto object-contain"
-                        ></img>
-                        <span class="underline">GitHub Pages</span>
-                    </a>
-                </h1>
-            </div>
-        </div>
+    <div class="about">
+      <p class="eyebrow">Data, Automation, Software</p>
+      
+      <!-- H1 is now empty to accommodate the typewriter effect -->
+      <h1 id="typewriter">&nbsp;</h1>
+      
+      <p class="bio">I am currently a freshman at the University of Michigan–Ann Arbor pursuing a dual major in Computer Science and Economics, alongside a minor in Data Science. I am passionate about bridging the gap between our generation's growing, uncapitalized data and actionable analytics. My focus is on data analysis and data engineering, with a strong interest in software development and automation. This is my personal website, where I share my projects and experiences.</p>
+      <p class="bio">Apart from engineering, I love endurance running, lifting, and reading, specifically biographies and autobiographies on founders and innovators of all backgrounds.</p>
+
+      <div class="socials">
+        <a href="mailto:aidenchen.contact@gmail.com" aria-label="Email">
+          <img src="files/email.png" alt="Email">
+        </a>
+        <a href="https://www.linkedin.com/in/acstartup/" aria-label="LinkedIn">
+          <img src="files/linkedin.png" alt="LinkedIn">
+        </a>
+        <a href="https://github.com/acstartup" aria-label="GitHub">
+          <img src="files/github.png" alt="GitHub">
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="panel">
+      <div class="label">Projects</div>
+      <p class="teaser">Explore the tools, ideas, and systems I've been exploring and building.</p>
+      <a class="go" href="/projects">View projects →</a>
+    </div>
+    <div class="panel">
+      <div class="label">Experience</div>
+      <p class="teaser">View my background in data analysis, technical research, and software development.</p>
+      <a class="go" href="/experience">View experience →</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>acstartup.dev is hosted on&nbsp;</span>
+  <a href="https://github.com/acstartup/acstartup.dev">GitHub Pages</a>
+</footer>
+
+<script>
+  // Intersection Observer for the panels
+  const panels = document.querySelectorAll('.panel');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  panels.forEach(p => io.observe(p));
+
+  // Typewriter effect script
+  const text = "Hey, I'm Aiden Chen!";
+  const speed = 85; // Typing speed in milliseconds
+  let i = 0;
+  const element = document.getElementById("typewriter");
+  
+  function typeWriter() {
+    // Clear the non-breaking space right before typing starts
+    if (i === 0) element.innerHTML = ""; 
+    
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    } else {
+      // Remove the blinking cursor 2 seconds after typing finishes
+      setTimeout(() => {
+        element.style.borderRight = "none";
+        element.style.animation = "none";
+      }, 1400);
+    }
+  }
+
+  // Starts the typing effect after a 300ms delay to match the page load
+  setTimeout(typeWriter, 300);
+</script>
+
 </body>
 </html>
