@@ -1,71 +1,335 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta view="viewport" width="width-devicewidth, initial-scale=1.0">
-    <title>Projects | acstartup.dev</title>
-    <link href="/dist/output.css" rel="stylesheet">
-    <link href="/styles.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects | Aiden Chen</title>
+<link rel="icon" type="image/svg+xml" href="/files/ac.dev.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a09;
+    --bg-elevated:#131311;
+    --line:#2a2a24;
+    --text:#e9e7de;
+    --muted:#8c897c;
+    --accent:#f2f1ea;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
+
+  /* ambient background */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0;
+    background: radial-gradient(ellipse 60% 45% at 50% 10%, rgba(242,241,234,0.06), transparent 70%);
+  }
+
+  /* Internship Notice Banner */
+  .notice-banner {
+    position:relative; z-index:30;
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* top bar */
+  header{
+    position:relative; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 56px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to bottom, rgba(10,10,9,0.9), rgba(10,10,9,0.6));
+    backdrop-filter:blur(6px);
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.05rem; font-weight:600; letter-spacing:0.02em;
+    color:var(--text); text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo::before{
+    content:"";
+    width:8px; height:8px; border-radius:1px;
+    background:var(--accent);
+    box-shadow:0 0 8px var(--accent);
+  }
+  nav{ display:flex; gap:48px; }
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem;
+    font-weight:400;
+    position:relative;
+    padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  nav a.active {
+    color: var(--text);
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0%; height:1px;
+    background:var(--accent);
+    transition:width .25s ease;
+  }
+  nav a:hover{ color:var(--text); }
+  nav a:hover::after{ width:100%; }
+
+  main{ position:relative; z-index:10; }
+
+  @keyframes rise{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* Page Header */
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 120px 56px 60px;
+    opacity: 0; transform: translateY(16px);
+    animation: rise .8s ease forwards;
+  }
+  .page-header h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    color: var(--text);
+  }
+  .page-header p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+  .page-header a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: border-color .2s ease;
+  }
+  .page-header a:hover {
+    border-color: var(--accent);
+  }
+
+  /* Project List */
+  .project-list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 56px 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+  .project {
+    border-top: 1px solid var(--line);
+    padding-top: 36px;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .project.in-view {
+    opacity: 1; transform: translateY(0);
+  }
+  .project-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 8px;
+  }
+  .project-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+  }
+  .project-date {
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .project-tech {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .project-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .project-desc p {
+    margin: 0 0 16px;
+  }
+  .project-desc p:last-child {
+    margin: 0;
+  }
+  
+  /* Project Links */
+  .project-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .project-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .project-links a:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+  .project-links img {
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    filter: invert(92%) sepia(6%) saturate(200%);
+    opacity: 0.7;
+    transition: opacity .2s ease;
+  }
+  .project-links a:hover img {
+    opacity: 1;
+  }
+
+  footer{
+    position:relative; z-index:10;
+    border-top:1px solid var(--line);
+    padding:26px 56px;
+    display:flex; justify-content:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.85rem; color:var(--muted);
+  }
+  footer a{ color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--line); }
+  footer a:hover{ color:var(--accent); border-color:var(--accent); }
+
+  @media (max-width: 900px){
+    header{ padding:22px 24px; }
+    nav{ gap:24px; }
+    .page-header { padding: 80px 24px 40px; }
+    .project-list { padding: 0 24px 90px; }
+    .project-header-row { flex-direction: column; gap: 8px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
-<body class="bg-black/90 overflow-x-hidden">
-        <div class="grid z-20 bg-white/90 w-full h-10"> <!-- notice -->
-            <h1 class="flex relative justify-center py-2 left-0.75 font-bold"> 🚨 Seeking SWE internship (now till end of Summer 2026) wanting to learn fast, work long hours, and go all-in.</h1>
-        </div>
-        <div class="grid z-20 place-items-center pt-6 px-8 lg:px-0"> <!-- header -->
-            <div class="flex relative border-2 gap-10 shadow-sm shadow-white/30 pb-2.5 justify-start pt-3 h-12 items-center border-black/40 bg-black/20 rounded-lg w-full max-w-[calc(100vw-4rem)] lg:w-260 lg:max-w-none">
-                <a href="/">
-                    <img src="/files/acstartup.dev.fill.png" alt="acstartup.dev"
-                    class="inline-block px-8 w-auto h-6 object-contain hover:opacity-80"
-                    ></img>
-                </a>
-                <a href="/projects" class="font-light pl-15 lg:pl-31 text-xl lg:text-base text-white">Projects</a>
-                <a href="/experience" class="font-light text-white/70 text-xl lg:text-base hover:text-white">Experience</a>
-                <a href="/contact" class="font-light text-white/70 text-xl lg:text-base hover:text-white">Contacts</a>
-            </div>
-        </div>
+<body>
 
-        <div class="grid relative justify-center top-8 px-8 pt-5 lg:pt-0 lg:px-0"> <!-- project header -->
-            <h1 class="text-white font-bold text-4xl lg:text-3xl">Projects</h1>
-            <h2 class="text-white font-light text-2xl lg:text-lg pt-2">Below are selected projects I've worked on. For the most up-to-date builds and source code, please visit my <a href="https://github.com/acstartup" class="font-bold underline hover:text-white/70">GitHub →</a></h2>
+<div class="grid-bg"></div>
 
-            <div class="w-full max-w-[calc(100vw-4rem)] lg:w-250 lg:max-w-none"> <!-- TaintMonkey -->
-                <div class="flex justify-between items-baseline gap-12 pt-10">
-                    <h1 class="text-white font-semibold text-2xl lg:text-lg">TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching</h1>
-                    <h2 class="text-white italic text-xl lg:text-base whitespace-nowrap pl-2">Jul 2025 - Oct 2025</h2>
-                </div>
-                <div class="flex justify-between items-baseline">
-                    <h2 class="relative text-white italic text-xl lg:text-base pt-2 lg:pt-0 lg:text-normal bottom-2">Python, Pytest, Git, pypi ('pip install taintmonkey')</h2>
-                    
-                    <a href="https://github.com/bliutech/TaintMonkey" class="flex items-center gap-2">
-                        <img
-                            src="/files/github.png" alt="github"
-                            class="h-10 lg:h-6 w-auto object-contain"
-                        ></img>
-                        <h1 class="text-white text-xl lg:text-base underline hover:text-white/70">bliutech/taintmonkey</h1>
-                    </a>
-                </div>
-                <div class="text-white font-light text-2xl lg:text-base w-full pt-2">
-                    <h1>TaintMonkey is a dynamic taint analysis library for Python Flask apps that uses monkey patching to instrument endpoints without changing source code. It includes a built-in fuzzer and plugin workflow to generate randomized inputs and detect vulnerabilities when tainted data reaches dangerous sinks without proper sanitization. The repo also ships with JungleGym, a dataset of 100+ intentionally vulnerable Flask apps mapped to CWE categories for testing and experiments.</h1>
-                    <h1 class="pt-3 pb-3">As a researcher, I programmed 32 of the 118 JungleGym test applications and built the corresponding vulnerability plugins. I added JSON-input tainting support to TaintMonkey, fixed major GitHub issues affecting data-flow tracking, and contributed to debugging and core architectural decisions. I also wrote the Experimental Procedures section of our research paper, designed all research figures in Figma, formatted the manuscript in Overleaf, and created the 13-slide deck presented at MIT Undergraduate Research Techology Conference (URTC) 2025. Throughout the project, I coordinated deadlines, kept the team on pace, and actively incorporated feedback to improve the research.</h1>
-                    <a href="https://drive.google.com/file/d/1Ms2BYNvVhQDD8NlQHi5p1bmDooO6XeGi/view?usp=sharing" class="underline font-normal hover:text-white/70">MIT URTC 2025 IEEE Xplore Publication →</a> <!-- ended off working on href for MIT version -->
-                </div>
-            </div>
-        </div>
+<header>
+  <a href="/" class="logo">acstartup.dev</a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/projects" class="active">Projects</a>
+    <a href="/experience">Experience</a>
+    <a href="/contact">Contact Me</a>
+  </nav>
+</header>
 
-        <div class="grid relative items-center pb-20 z-20 top-200 lg:top-88"> <!-- footer -->
-            <h1 class="text-white flex items-center justify-center text-2xl lg:text-lg gap-2 font-normal">
-                <a href="https://acstartup.dev/" class="underline hover:text-white/70">acstartup.dev</a>
-                is hosted on
-                <a
-                    href="https://github.com/acstartup/acstartup.dev"
-                    class="flex items-center gap-1 hover:opacity-80">
-                    <img
-                    src="/files/github.png" alt="github"
-                    class="h-15 lg:h-8 w-auto object-contain"
-                    ></img>
-                    <span class="underline">GitHub Pages</span>
-                </a>
-            </h1>
-        </div>
+<main>
+  <section class="page-header">
+    <h1>Projects</h1>
+    <p>Below are selected projects I've worked on. For the most up-to-date builds and source code, please visit my <a href="https://github.com/acstartup">GitHub →</a></p>
+  </section>
+
+  <section class="project-list">
+    
+    <!-- New M&A Project -->
+    <div class="project">
+      <div class="project-header-row">
+        <h2 class="project-title">M&A SME Financial Analysis: 10-Year Baseline & 5-Year Projections</h2>
+        <span class="project-date">Aug 2026</span>
+      </div>
+      <span class="project-tech">Excel, SQL, Tableau Public</span>
+      
+      <div class="project-desc">
+        <p>Developed a comprehensive financial model for a small-medium enterprise ($40.8M+ total revenue), analyzing its 10-year historical performance (2015–2025, including 2026 financial projections) and forecasting a 5-year trajectory across three macroeconomic scenarios (Bull, Base, Bear). Leveraged Excel for initial data structuring and profit calculations, SQL for KPI aggregation (CAGR, margin trends), and Tableau Public for interactive visualization.</p>
+        <p>Ultimately provided data-driven M&A recommendations, advising the client to pivot from unhedged top-line expansion to disciplined cost optimization. I recommended a three-year margin improvement phase prior to pursuing an exit to improve business financial health and present a more attractive, profitable asset to potential acquirers.</p>      
+      </div>
+
+      <div class="project-links">
+        <a href="https://public.tableau.com/app/profile/aiden.chen4958/viz/MAValuationFinancialForecast/Dashboard1?publish=yes" target="_blank" rel="noopener noreferrer">
+          View Live on Tableau Public →
+        </a>
+      </div>
     </div>
+
+    <!-- TaintMonkey Project -->
+    <div class="project">
+      <div class="project-header-row">
+        <h2 class="project-title">TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching</h2>
+        <span class="project-date">Jul 2025 - Oct 2025</span>
+      </div>
+      <span class="project-tech">Python, Pytest, Git, pypi ('pip install taintmonkey')</span>
+      
+      <div class="project-desc">
+        <p>TaintMonkey is a dynamic taint analysis library for Python Flask apps that uses monkey patching to instrument endpoints without changing source code. It includes a built-in fuzzer and plugin workflow to generate randomized inputs and detect vulnerabilities when tainted data reaches dangerous sinks without proper sanitization. The repo also ships with JungleGym, a dataset of 100+ intentionally vulnerable Flask apps mapped to CWE categories for testing and experiments.</p>
+        <p>As a researcher, I programmed 32 of the 118 JungleGym test applications and built the corresponding vulnerability plugins. I added JSON-input tainting support to TaintMonkey, fixed major GitHub issues affecting data-flow tracking, and contributed to debugging and core architectural decisions. I also wrote the Experimental Procedures section of our research paper, designed all research figures in Figma, formatted the manuscript in Overleaf, and created the 13-slide deck presented at MIT Undergraduate Research Techology Conference (URTC) 2025. Throughout the project, I coordinated deadlines, kept the team on pace, and actively incorporated feedback to improve the research.</p>
+      </div>
+
+      <div class="project-links">
+        <a href="https://github.com/bliutech/TaintMonkey" target="_blank" rel="noopener noreferrer">
+          <img src="../files/github.png" alt="GitHub">
+          bliutech/taintmonkey
+        </a>
+        <a href="https://drive.google.com/file/d/1Ms2BYNvVhQDD8NlQHi5p1bmDooO6XeGi/view?usp=sharing" target="_blank" rel="noopener noreferrer">
+          MIT URTC 2025 IEEE Xplore Publication →
+        </a>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  <span>acstartup.dev is hosted on&nbsp;</span>
+  <a href="https://github.com/acstartup/acstartup.dev">GitHub Pages</a>
+</footer>
+
+<script>
+  // Fade-in effect for projects as you scroll
+  const projects = document.querySelectorAll('.project');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  projects.forEach(p => io.observe(p));
+</script>
+
 </body>
+</html>
