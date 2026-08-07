@@ -1,24 +1,8 @@
-# acstartup.dev
+# 💻 acstartup.dev
 
-My personal portfolio website built with HTML & Tailwind CSS showcasing projects, experience, and contact information.
+My personal portfolio website repository built with HTML & Tailwind CSS showcasing projects, experience, and contact information.
 
-## Features
-- Custom Geist Sans typography for modern aesthetic
-- Smooth hover animations and transitions
-- Multi-page navigation (Home, Projects, Experience, Contacts)
-- Circular profile image with proper image cropping
-- Social media integration (LinkedIn, GitHub, X/Twitter)
-- Active page subheader highlighting in navigation
-- Project showcase with GitHub repository links
-
-## Live Demo
-🌐 [acstartup.dev](https://acstartup.dev)
-
-## How to Run Locally
-
-### Prerequisites
-- Node.js installed on your machine
-- npm package manager
+Check out the website at [acstartup.dev](https://acstartup.dev)!
 
 ### Installation & Development
 
