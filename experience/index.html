@@ -1,118 +1,357 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta view="viewport" width="width-devicewidth, initial-scale=1.0">
-    <title>Projects | acstartup.dev</title>
-    <link href="/dist/output.css" rel="stylesheet">
-    <link href="/styles.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Experience | Aiden Chen</title>
+<link rel="icon" type="image/svg+xml" href="/files/ac.dev.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a09;
+    --bg-elevated:#131311;
+    --line:#2a2a24;
+    --text:#e9e7de;
+    --muted:#8c897c;
+    --accent:#f2f1ea;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans', system-ui, sans-serif;
+    font-weight:300;
+    overflow-x:hidden;
+  }
+  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
+
+  /* ambient background */
+  .grid-bg{
+    position:fixed; inset:0; z-index:0;
+    background: radial-gradient(ellipse 60% 45% at 50% 10%, rgba(242,241,234,0.06), transparent 70%);
+  }
+
+  /* Internship Notice Banner */
+  .notice-banner {
+    position:relative; z-index:30;
+    background: var(--accent);
+    color: var(--bg);
+    text-align: center;
+    padding: 10px 24px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  /* top bar */
+  header{
+    position:relative; z-index:20;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:28px 56px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(to bottom, rgba(10,10,9,0.9), rgba(10,10,9,0.6));
+    backdrop-filter:blur(6px);
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:1.05rem; font-weight:600; letter-spacing:0.02em;
+    color:var(--text); text-decoration:none;
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo::before{
+    content:"";
+    width:8px; height:8px; border-radius:1px;
+    background:var(--accent);
+    box-shadow:0 0 8px var(--accent);
+  }
+  nav{ display:flex; gap:48px; }
+  nav a{
+    color:var(--muted);
+    text-decoration:none;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.95rem;
+    font-weight:400;
+    position:relative;
+    padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  nav a.active {
+    color: var(--text);
+  }
+  nav a::after{
+    content:"";
+    position:absolute; left:0; bottom:0;
+    width:0%; height:1px;
+    background:var(--accent);
+    transition:width .25s ease;
+  }
+  nav a:hover{ color:var(--text); }
+  nav a:hover::after{ width:100%; }
+
+  main{ position:relative; z-index:10; }
+
+  @keyframes rise{
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  /* Page Header */
+  .page-header {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 50px 56px 60px;
+    opacity: 0; transform: translateY(16px);
+    animation: rise .8s ease forwards;
+  }
+  .page-header h1 {
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 500;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 16px;
+    color: var(--text);
+  }
+  .page-header p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin: 0;
+  }
+  .page-header a {
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: border-color .2s ease;
+  }
+  .page-header a:hover {
+    border-color: var(--accent);
+  }
+
+  /* Experience List */
+  .experience-list {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 56px 140px;
+    display: flex;
+    flex-direction: column;
+    gap: 72px;
+  }
+  .experience {
+    border-top: 1px solid var(--line);
+    padding-top: 36px;
+    opacity: 0; transform: translateY(24px);
+    transition: opacity .7s ease, transform .7s ease;
+  }
+  .experience.in-view {
+    opacity: 1; transform: translateY(0);
+  }
+  .exp-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    margin-bottom: 6px;
+  }
+  .exp-title {
+    font-size: 1.35rem;
+    font-weight: 500;
+    color: var(--text);
+    margin: 0;
+  }
+  .exp-date {
+    font-size: 0.95rem;
+    color: var(--muted);
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .exp-company-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .exp-company {
+    font-size: 1.05rem;
+    color: var(--text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+    transition: border-color .2s ease;
+  }
+  .exp-company:hover {
+    border-color: var(--accent);
+  }
+  .exp-location {
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .exp-tech {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .exp-desc {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 24px;
+  }
+  .exp-desc p {
+    margin: 0 0 16px;
+  }
+  .exp-desc p:last-child {
+    margin: 0;
+  }
+  
+  /* Links */
+  .exp-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .exp-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: var(--muted);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  .exp-links a:hover {
+    color: var(--text);
+    border-color: var(--accent);
+  }
+
+  footer{
+    position:relative; z-index:10;
+    border-top:1px solid var(--line);
+    padding:26px 56px;
+    display:flex; justify-content:center;
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:0.85rem; color:var(--muted);
+  }
+  footer a{ color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--line); }
+  footer a:hover{ color:var(--accent); border-color:var(--accent); }
+
+  @media (max-width: 900px){
+    header{ padding:22px 24px; }
+    nav{ gap:24px; }
+    .page-header { padding: 80px 24px 40px; }
+    .experience-list { padding: 0 24px 90px; }
+    .exp-header-row, .exp-company-row { flex-direction: column; gap: 4px; align-items: flex-start; }
+    .exp-company-row { margin-bottom: 16px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+</style>
 </head>
-<body class="bg-black/90 overflow-x-hidden">
-        <div class="grid z-20 bg-white/90 w-full h-10"> <!-- notice -->
-            <h1 class="flex relative justify-center py-2 left-0.75 font-bold"> 🚨 Seeking SWE internship (now till end of Summer 2026) wanting to learn fast, work long hours, and go all-in.</h1>
-        </div>
-        <div class="grid z-20 place-items-center pt-6 px-8 lg:px-0"> <!-- header -->
-            <div class="flex relative border-2 gap-10 shadow-sm shadow-white/30 pb-2.5 justify-start pt-3 h-12 items-center border-black/40 bg-black/20 rounded-lg w-full max-w-[calc(100vw-4rem)] lg:w-260 lg:max-w-none">
-                <a href="/">
-                    <img src="/files/acstartup.dev.fill.png" alt="acstartup.dev"
-                    class="inline-block px-8 w-auto h-6 object-contain hover:opacity-80"
-                    ></img>
-                </a>
-                <a href="/projects" class="font-light pl-15 lg:pl-31 text-xl lg:text-base text-white/70 hover:text-white">Projects</a>
-                <a href="/experience" class="font-light text-xl lg:text-base text-white">Experience</a>
-                <a href="/contact" class="font-light text-xl lg:text-base text-white/70 hover:text-white">Contacts</a>
-            </div>
-        </div>
+<body>
 
-        <div class="grid relative justify-center top-8 px-8 pt-5 lg:pt-0 lg:px-0"> <!-- experience header -->
-            <h1 class="text-white font-bold text-4xl lg:text-3xl">Experiences</h1>
-            <h2 class="text-white font-light text-2xl lg:text-lg pt-2">Below are selected experiences and roles I've taken on. For the most up-to-date information, please visit my <a href="https://www.linkedin.com/in/acstartup/" class="font-bold underline hover:text-white/70">LinkedIn →</a></h2>
+<div class="grid-bg"></div>
 
-            <div class="w-full max-w-[calc(100vw-4rem)] lg:w-250 lg:max-w-none"> <!-- 1851 Labs -->
-                <div class="flex relative justify-between items-baseline gap-12 pt-7 lg:pt-10 top-3 lg:top-0">
-                    <h1 class="text-white font-semibold text-2xl lg:text-lg">Software Engineer Intern</h1>
-                    <h2 class="text-white relative italic text-xl lg:text-base whitespace-nowrap pl-2 bottom-1 lg:bottom-0">Feb 2026 - Apr 2026</h2>
-                </div>
-                <div class="flex justify-between items-baseline">
-                    <a href="https://1851labs.com/" class="relative text-white hover:text-white/70 font-normal text-xl lg:text-base pt-2 lg:pt-0 bottom-2 underline mb-2">1851 Labs</a>
-                </div>
-                <div class="text-white font-light text-2xl lg:text-base w-full pt-0">
-                    <h1 class="pt-3 pb-3">Handling end-to-end growth and some programming on an 8-person team at 1851 Labs, the crew behind GenTube—an AI video creation platform with 500,000+ users. Founded by Mo Musbah, who co-founded Maluuba and sold it to Microsoft for $160M, and Josh Kuntz, a founding engineer at Wish who scaled systems to 90M+ monthly users.</h1>
-                </div>
-            </div>
+<header>
+  <a href="/" class="logo">acstartup.dev</a>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/projects">Projects</a>
+    <a href="/experience" class="active">Experience</a>
+    <a href="/contact">Contact Me</a>
+  </nav>
+</header>
 
-            <div class="w-full max-w-[calc(100vw-4rem)] lg:w-250 lg:max-w-none"> <!-- UnitNode -->
-                <div class="flex relative justify-between items-baseline gap-12 pt-7 lg:pt-10 top-3 lg:top-0">
-                    <h1 class="text-white font-semibold text-2xl lg:text-lg">Co-Founder</h1>
-                    <h2 class="text-white relative italic text-xl lg:text-base whitespace-nowrap pl-2 bottom-1 lg:bottom-0">Dec 2024 - Feb 2025</h2>
-                </div>
-                <div class="flex justify-between items-baseline">
-                    <a href="https://unitnode.com/" class="relative text-white hover:text-white/70 font-normal text-xl lg:text-base pt-2 lg:pt-0 bottom-2 underline mb-2">UnitNode</a>
+<main>
+  <section class="page-header">
+    <h1>Experience</h1>
+    <p>Below are selected experiences and roles I've taken on. For the most up-to-date information, please visit my <a href="https://www.linkedin.com/in/acstartup/" target="_blank" rel="noopener noreferrer">LinkedIn →</a></p>
+  </section>
 
-                </div>
-                <div class="grid relative bottom-2">
-                    <h1 class="relative text-white italic font-light text-xl lg:text-base bottom-1.5">HTML, CSS, Javascript/Typescript, Git, Vercel, Supabase, many APIs</h1>
-                </div>
-
-                <div class="text-white font-light text-2xl lg:text-base w-full pt-0">
-                    <!-- <h1>UnitNode is the first real estate operations software that replaces outsourced property management with automation and simplicity for owners, helping them increase rental income margins, boost efficiency, and regain control of their portfolio effortlessly.</h1> -->
-                    <h1 class="pt-3 pb-3">As a co-founder, I’ve helped ship nearly every core feature from building the end-to-end workflows <!-- for properties, leases, bills, and payments to refining the --> and refining UI/UX across the product and marketing site. I’ve implemented payments and billing with the Stripe API and built automation features <!-- like translated tenant alerts and email/document parsing that turns incoming utility emails into structured tenant bills with due dates. --> I’ve also contributed across the stack on database UI/UX design, normal/Google authentication, integrations, testing/bug fixes, and deployment—doing whatever the product needed to move faster and stay simple.</h1>
-                </div>
-            </div>
-
-            <div class="w-full max-w-[calc(100vw-4rem)] lg:w-250 lg:max-w-none"> <!-- New Jersey Governor's School -->
-                <div class="flex justify-between items-baseline gap-12 pt-10">
-                    <h1 class="text-white font-semibold text-2xl lg:text-lg">Research Scholar</h1>
-                    <h2 class="text-white italic text-xl lg:text-base whitespace-nowrap pl-2">Jun 2025 - Jul 2025</h2>
-                </div>
-                <div class="flex justify-between items-baseline">
-                    <a href="https://unitnode.com/" class="relative text-white hover:text-white/70 font-normal text-xl lg:text-base pt-2 lg:pt-0 bottom-2 underline mb-2">New Jersey Governor's School of Engineering and Technology</a>
-                    <h1 class="relative text-white text-xl lg:text-base bottom-2 pt-2">New Brunswick, NJ</h1>
-                </div>
-                <div class="grid relative bottom-2">
-                    <h1 class="relative text-white italic font-light text-xl lg:text-base bottom-1.5">Python, Pytest, Git, LaTex, Figma</h1>
-                </div>
-
-                <div class="text-white font-light text-2xl lg:text-base w-full pt-2">
-                    <h1>Accepted as a Scholar among the top 64 of New Jersey high school students with a less than 1% acceptance rate. Completed coursework in Modern Physics, Robotics, Sustainable Energy, and AI/ML Engineering.</h1>
-                    <h1 class="pt-3 pb-3">As an NJGSET Scholar, I built a Python-based emotional support assistant using the Gemini API, designed to simulate conversations with specific individuals by grounding responses in publicly available information (e.g., LinkedIn profiles, biographies, and portfolios). I also helped develop the initial 15-page paper, “TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching,” published in the NJGSET Research Paper Archive and presented at the NJGSET 2025 Symposium (<a href="../projects/index.html" class="underline hover:text-white/70">Later presented at MIT URTC 2025, Published in IEEE Xplore</a>).</h1>
-                    <a href="https://drive.google.com/file/d/1H3-AcJWlBV2stjgsefnRC3_fEwS-BlX1/view" class="underline pr-2 font-normal hover:text-white/70">NJ Governor's School of Engineering and Technology 2025 Publication →</a>
-                </div>
-            </div>
-
-            <div class="w-full max-w-[calc(100vw-4rem)] lg:w-250 lg:max-w-none"> <!-- HomeVistaRealty -->
-                <div class="flex justify-between items-baseline gap-12 pt-14">
-                    <h1 class="text-white font-semibold text-2xl lg:text-lg">Data Analyst Intern</h1>
-                    <h2 class="text-white italic text-xl lg:text-base whitespace-nowrap pl-2">Jun 2024 - Sep 2024</h2>
-                </div>
-                <div class="flex justify-between items-baseline">
-                    <a href="https://homevistarealty.com/" class="relative text-white hover:text-white/70 font-normal text-xl lg:text-base pt-2 lg:pt-0 bottom-2 underline mb-2">Home Vista Realty</a>
-                    <h1 class="relative text-white text-xl lg:text-base bottom-2 pt-2">Philadelphia, PA</h1>
-                </div>
-                <div class="grid relative bottom-2">
-                    <h1 class="relative text-white italic font-light text-xl lg:text-base bottom-1.5">Python, Appfolio, Rent Manager, Google Sheets</h1>
-                </div>
-
-                <div class="text-white font-light text-2xl lg:text-base w-full pt-2 pb-20">
-                    <h1>Built a database of 1,160+ properties across New Jersey and Pennsylvania, then developed an OpenAI API–powered analyzer to process Philadelphia Water Department billing reports and cross-reference month-by-month data for accuracy (filtering outliers) to uncover water-bill cost anomalies at scale. Using these insights, I partnered with local contractors to upgrade outdated utility systems and implement low-waste solutions in 12 Philadelphia homes with the highest water costs.</h1>
-                </div>
-            </div>
-        </div>
-
-        <div class="grid relative items-center pb-20 z-20 top-60 lg:top-40"> <!-- footer -->
-            <h1 class="text-white flex items-center justify-center text-2xl lg:text-lg gap-2 font-normal">
-                <a href="https://acstartup.dev/" class="underline hover:text-white/70">acstartup.dev</a>
-                is hosted on
-                <a
-                    href="https://github.com/acstartup/acstartup.dev"
-                    class="flex items-center gap-1 hover:opacity-80">
-                    <img
-                    src="/files/github.png" alt="github"
-                    class="h-15 lg:h-8 w-auto object-contain"
-                    ></img>
-                    <span class="underline">GitHub Pages</span>
-                </a>
-            </h1>
-        </div>
+  <section class="experience-list">
+    
+    <!-- UnitNode -->
+    <div class="experience">
+      <div class="exp-header-row">
+        <h2 class="exp-title">Co-Founder</h2>
+        <span class="exp-date">Dec 2024 - Nov 2025</span>
+      </div>
+      <div class="exp-company-row">
+        <a href="https://unitnode.com/" class="exp-company" target="_blank" rel="noopener noreferrer">UnitNode</a>
+      </div>
+      <span class="exp-tech">HTML, CSS, Javascript/Typescript, Git, Vercel, Supabase, APIs</span>
+      
+      <div class="exp-desc">
+        <p>UnitNode aimed to be the first real estate operations software that replaces outsourced property management with automation and simplicity for owners, helping them increase rental income margins, boost efficiency, and regain control of their portfolio effortlessly.</p>
+        <p>As a co-founder, I’ve helped ship nearly every core feature—from building the end-to-end workflows for properties, leases, bills, and payments, to refining UI/UX across the product and marketing site. I’ve implemented payments and billing with the Stripe API and built automation features like translated tenant alerts and email parsing that turns incoming utility email into structured tenant bills with due dates. I’ve also contributed across the stack on database UI/UX design, authentication, integrations, testing/bug fixes, and deployment—doing whatever the product needed to move faster and stay simple. In addition, I provided on-call support and conducted user interviews with property management firms and individual homeowners, helping grow the platform to manage over 1,900+ properties and 40+ owners across multiple states.</p>
+      </div>
     </div>
+
+    <!-- NJGSET -->
+    <div class="experience">
+      <div class="exp-header-row">
+        <h2 class="exp-title">Research Scholar</h2>
+        <span class="exp-date">Jun 2025 - Jul 2025</span>
+      </div>
+      <div class="exp-company-row">
+        <a href="#" class="exp-company" style="pointer-events: none; border-bottom: none;">New Jersey Governor's School of Engineering and Technology</a>
+        <span class="exp-location">New Brunswick, NJ</span>
+      </div>
+      <span class="exp-tech">Python, Pytest, Git, LaTeX, Figma</span>
+      
+      <div class="exp-desc">
+        <p>Accepted as a Scholar among the top 64 New Jersey high school students with a less than 1% acceptance rate. Completed coursework in Modern Physics, Robotics, Sustainable Energy, and AI/ML Engineering.</p>
+        <p>As an NJGSET Scholar, I built a Python-based emotional support assistant using the Gemini API, designed to simulate conversations with specific individuals by grounding responses in publicly available information (e.g., LinkedIn profiles, biographies, and portfolios). I also helped develop the initial 15-page paper, “TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching,” published in the NJGSET Research Paper Archive and presented at the NJGSET 2025 Symposium.</p>
+      </div>
+      <div class="exp-links">
+        <a href="https://drive.google.com/file/d/1H3-AcJWlBV2stjgsefnRC3_fEwS-BlX1/view" target="_blank" rel="noopener noreferrer">NJGSET 2025 Publication →</a>
+        <a href="/projects">Later presented at MIT URTC 2025 (See Projects) →</a>
+      </div>
+    </div>
+
+    <!-- Home Vista Realty -->
+    <div class="experience">
+      <div class="exp-header-row">
+        <h2 class="exp-title">Data Analyst Intern</h2>
+        <span class="exp-date">Jun 2024 - Sep 2024</span>
+      </div>
+      <div class="exp-company-row">
+        <a href="https://homevistarealty.com/" class="exp-company" target="_blank" rel="noopener noreferrer">Home Vista Realty</a>
+        <span class="exp-location">Philadelphia, PA</span>
+      </div>
+      <span class="exp-tech">Excel, Python</span>
+      
+      <div class="exp-desc">
+        <p>Built a database of 1,160+ properties across New Jersey and Pennsylvania, then developed an OpenAI API–powered analyzer to process Philadelphia Water Department billing reports and cross-reference month-by-month data for accuracy to uncover water-bill cost anomalies at scale. Using these insights, I partnered with local contractors to upgrade outdated utility systems and implement low-waste solutions in 12 Philadelphia homes with the highest water costs.</p>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  <span>acstartup.dev is hosted on&nbsp;</span>
+  <a href="https://github.com/acstartup/acstartup.dev">GitHub Pages</a>
+</footer>
+
+<script>
+  // Fade-in effect for experiences as you scroll
+  const experiences = document.querySelectorAll('.experience');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in-view');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  experiences.forEach(p => io.observe(p));
+</script>
+
 </body>
+</html>
