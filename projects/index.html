@@ -139,7 +139,7 @@
   .project-header-row {
     display: flex;
     justify-content: space-between;
-    align-items: baseline;
+    align-items: flex-start;
     gap: 24px;
     margin-bottom: 6px;
   }
@@ -149,10 +149,23 @@
     color: var(--text);
     margin: 0;
   }
+  .project-header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 2px;
+    flex-shrink: 0;
+  }
   .project-date {
     font-size: 0.95rem;
     color: var(--muted);
     font-style: italic;
+    white-space: nowrap;
+  }
+  .project-location {
+    font-size: 0.9rem;
+    color: var(--muted);
     white-space: nowrap;
   }
   .project-role {
@@ -231,7 +244,8 @@
     nav{ gap:24px; }
     .page-header { padding: 80px 24px 40px; }
     .project-list { padding: 0 24px 90px; }
-    .project-header-row { flex-direction: column; gap: 8px; }
+    .project-header-row { flex-direction: column; gap: 4px; }
+    .project-header-right { align-items: flex-start; text-align: left; }
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -264,7 +278,9 @@
     <div class="project">
       <div class="project-header-row">
         <h2 class="project-title">E-Commerce Churn Analysis & Pricing Strategy: ML Modeling & CLV Optimization</h2>
-        <span class="project-date">Aug 2026</span>
+        <div class="project-header-right">
+          <span class="project-date">Aug 2026</span>
+        </div>
       </div>
       <span class="project-role">Data Analytics & Strategy Consultant</span>
       <span class="project-tech">Python (scikit-learn, Pandas, NumPy), SQL, Tableau Public, GitHub</span>
@@ -289,7 +305,9 @@
     <div class="project">
       <div class="project-header-row">
         <h2 class="project-title">M&A SME Financial Analysis: 10-Year Baseline & 5-Year Projections</h2>
-        <span class="project-date">Jul 2026 - Aug 2026</span>
+        <div class="project-header-right">
+          <span class="project-date">Jul 2026 - Aug 2026</span>
+        </div>
       </div>
       <span class="project-role">M&A Data Analytics Consultant</span>
       <span class="project-tech">Excel, SQL, Tableau Public, GitHub</span>
@@ -314,7 +332,10 @@
     <div class="project">
       <div class="project-header-row">
         <h2 class="project-title">TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching</h2>
-        <span class="project-date">Cambridge, MA · Jul 2025 - Oct 2025</span>
+        <div class="project-header-right" style="gap: 10px">
+          <span class="project-date">Jul 2025 - Oct 2025</span>
+          <span class="project-location">Cambridge, MA</span>
+        </div>
       </div>
       <span class="project-role">Researcher, Software Developer, Publication Co-Author (Published into IEEE Xplore)</span>
       <span class="project-tech">Python, Pytest, Git, PyPI ('pip install taintmonkey')</span>
