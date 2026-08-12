@@ -130,6 +130,26 @@
     border-color: var(--accent);
   }
 
+  /* Section Subheaders */
+  .section-title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 20px 0 0px; /* <-- Reduced bottom margin from 28px to 8px */
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .section-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
   /* Experience List */
   .experience-list {
     max-width: 900px;
@@ -137,13 +157,18 @@
     padding: 0 56px 140px;
     display: flex;
     flex-direction: column;
-    gap: 72px;
+    gap: 48px;
   }
   .experience {
     border-top: 1px solid var(--line);
     padding-top: 36px;
     opacity: 0; transform: translateY(24px);
     transition: opacity .7s ease, transform .7s ease;
+  }
+  /* Remove border line for items immediately following a section subheader */
+  .section-title + .experience {
+    border-top: none;
+    padding-top: 12px;
   }
   .experience.in-view {
     opacity: 1; transform: translateY(0);
@@ -156,7 +181,7 @@
     margin-bottom: 6px;
   }
   .exp-title {
-    font-size: 1.35rem;
+    font-size: 1.4rem;
     font-weight: 500;
     color: var(--text);
     margin: 0;
@@ -201,7 +226,7 @@
     margin-bottom: 24px;
   }
   .exp-desc p {
-    margin: 0 0 16px;
+    margin: 0 0 12px;
   }
   .exp-desc p:last-child {
     margin: 0;
@@ -269,11 +294,35 @@
 <main>
   <section class="page-header">
     <h1>Experience</h1>
-    <p>Below are selected experiences and roles I've taken on. For the most up-to-date information, please visit my <a href="https://www.linkedin.com/in/acstartup/" target="_blank" rel="noopener noreferrer">LinkedIn →</a></p>
+    <p>Below are selected experiences, education, and roles I've taken on. For the most up-to-date information, please visit my <a href="https://www.linkedin.com/in/acstartup/" target="_blank" rel="noopener noreferrer">LinkedIn →</a></p>
   </section>
 
   <section class="experience-list">
     
+    <!-- SECTION SUBHEADER: EDUCATION -->
+    <div class="section-title">Education</div>
+
+    <!-- University of Michigan -->
+    <div class="experience">
+      <div class="exp-header-row">
+        <h2 class="exp-title">〽️ University of Michigan</h2>
+        <span class="exp-date">Aug 2026 - Exp. May 2029</span>
+      </div>
+      <div class="exp-company-row">
+        <a href="https://umich.edu/" class="exp-company" target="_blank" rel="noopener noreferrer">B.S. in Computer Science and Economics, Minor in Data Science</a>
+        <span class="exp-location">Ann Arbor, MI</span>
+      </div>
+      
+      <div class="exp-desc">
+        <p><strong>Extracurriculars:</strong> Michigan Data Science Team (MDST), Michigan Hackers</p>
+        <p><strong>CS/DS Coursework:</strong> Advanced Topics Discrete Mathematics, Fundamental Programming Concepts in C++</p>
+        <p><strong>Economics Coursework:</strong> Principles of Microeconomics</p>
+      </div>
+    </div>
+
+    <!-- SECTION SUBHEADER: PROFESSIONAL EXPERIENCE -->
+    <div class="section-title" style="margin-top: 32px;">Professional Experience</div>
+
     <!-- UnitNode -->
     <div class="experience">
       <div class="exp-header-row">
