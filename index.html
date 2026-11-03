@@ -4,384 +4,485 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Aiden Chen</title>
-<link rel="icon" type="image/svg+xml" href="files/ac.dev.png">
+<meta name="description" content="Aiden Chen: Computer Science and Statistics at the University of Michigan. Data, software, and startups.">
+<link rel="icon" type="image/png" href="files/ac.dev.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0a0a09;
-    --bg-elevated:#131311;
-    --line:#2a2a24;
-    --text:#e9e7de;
-    --muted:#8c897c;
-    --accent:#f2f1ea;
+    --bg:#0b0b0c;
+    --surface:#131315;
+    --line:#242428;
+    --text:#ededef;
+    --muted:#8d8d95;
+    --faint:#5e5e66;
+    --accent:#ededef;
+    --sans:'Inter', system-ui, -apple-system, sans-serif;
+    --mono:'JetBrains Mono', ui-monospace, monospace;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --bg:#fbfbfa;
+      --surface:#f2f2f0;
+      --line:#e4e4e0;
+      --text:#18181b;
+      --muted:#6b6b73;
+      --faint:#9a9aa2;
+      --accent:#18181b;
+    }
   }
 
-  *{box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
   body{
     margin:0;
     background:var(--bg);
     color:var(--text);
-    font-family:'IBM Plex Sans', system-ui, sans-serif;
-    font-weight:300;
-    overflow-x:hidden;
+    font-family:var(--sans);
+    font-size:15px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
   }
-  .mono{ font-family:'IBM Plex Mono', ui-monospace, monospace; }
+  a{ color:inherit; }
+  ::selection{ background:var(--text); color:var(--bg); }
 
-  .grid-bg{
-    position:fixed; inset:0; z-index:0;
-    background: radial-gradient(ellipse 60% 45% at 50% 10%, rgba(242,241,234,0.06), transparent 70%);
+  .wrap{
+    max-width:1040px;
+    margin:0 auto;
+    padding:72px 32px 96px;
+    display:grid;
+    grid-template-columns:280px minmax(0,1fr);
+    gap:88px;
+    align-items:start;
   }
 
-  header{
-    position:relative; z-index:20;
+  /* ---------- sidebar ---------- */
+  aside{
+    position:sticky; top:72px;
+    display:flex; flex-direction:column; gap:28px;
+  }
+  .me img{
+    width:72px; height:72px; border-radius:50%;
+    object-fit:cover; display:block;
+    border:1px solid var(--line);
+    margin-bottom:18px;
+  }
+  .me h1{
+    font-size:1.25rem; font-weight:600; letter-spacing:-0.01em;
+    margin:0 0 2px;
+  }
+  .me .sub{ color:var(--muted); margin:0 0 14px; }
+  .me p.bio{ color:var(--muted); margin:0 0 10px; font-size:0.9rem; }
+
+  .connect{
+    border:1px solid var(--line);
+    background:var(--surface);
+    border-radius:12px;
+    padding:18px;
+  }
+  .connect h2{
+    font-size:0.95rem; font-weight:600; margin:0 0 4px;
+  }
+  .connect p{ margin:0 0 14px; color:var(--muted); font-size:0.88rem; }
+  .btn{
     display:flex; align-items:center; justify-content:space-between;
-    padding:28px 56px;
-    border-bottom:1px solid var(--line);
-    background:linear-gradient(to bottom, rgba(10,10,9,0.9), rgba(10,10,9,0.6));
-    backdrop-filter:blur(6px);
+    background:var(--accent); color:var(--bg);
+    text-decoration:none; font-weight:500; font-size:0.9rem;
+    padding:9px 14px; border-radius:8px;
+    transition:opacity .2s ease;
   }
-  .logo{
-    font-family:'IBM Plex Mono', monospace;
-    font-size:1.05rem; font-weight:600; letter-spacing:0.02em;
-    color:var(--text); text-decoration:none;
+  .btn:hover{ opacity:.85; }
+  .btn svg{ transition:transform .2s ease; }
+  .btn:hover svg{ transform:translate(2px,-2px); }
+
+  .links{ list-style:none; margin:14px 0 0; padding:0; }
+  .links a{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:7px 0; text-decoration:none;
+    color:var(--muted); font-size:0.9rem;
+    border-top:1px solid var(--line);
+    transition:color .2s ease;
+  }
+  .links li:first-child a{ border-top:none; }
+  .links a:hover{ color:var(--text); }
+  .links svg{ transition:transform .2s ease; }
+  .links a:hover svg{ transform:translate(2px,-2px); }
+
+  /* ---------- sections ---------- */
+  section + section{ margin-top:56px; }
+  .section-label{
+    font-family:var(--mono);
+    font-size:0.75rem; letter-spacing:0.06em; text-transform:uppercase;
+    color:var(--faint);
+    margin:0 0 6px;
+  }
+
+  .item{ border-bottom:1px solid var(--line); }
+  .row{
     display:flex; align-items:center; gap:8px;
   }
-  .logo::before{
-    content:"";
-    width:8px; height:8px; border-radius:1px;
-    background:var(--accent);
-    box-shadow:0 0 8px var(--accent);
+  .toggle{
+    flex:1; min-width:0;
+    display:flex; align-items:center; gap:14px;
+    background:none; border:0; padding:16px 0;
+    color:inherit; font:inherit; text-align:left; cursor:pointer;
   }
-  nav{ display:flex; gap:48px; }
-  nav a{
-    color:var(--muted);
-    text-decoration:none;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.95rem;
-    font-weight:400;
-    position:relative;
-    padding-bottom:4px;
-    transition:color .25s ease;
+  .toggle:focus-visible, .out:focus-visible, .btn:focus-visible, .links a:focus-visible{
+    outline:2px solid var(--text); outline-offset:3px; border-radius:6px;
   }
-  nav a.active {
-    color: var(--text);
+  .text{ flex:1; min-width:0; }
+  .title{ display:block; font-weight:500; }
+  .org{ display:block; color:var(--muted); font-size:0.88rem; }
+  .date{
+    font-family:var(--mono); font-size:0.78rem; color:var(--faint);
+    white-space:nowrap; text-align:right;
   }
-  nav a::after{
-    content:"";
-    position:absolute; left:0; bottom:0;
-    width:0%; height:1px;
-    background:var(--accent);
-    transition:width .25s ease;
+  .chev{
+    flex:none; color:var(--faint);
+    transition:transform .25s ease, color .2s ease;
   }
-  nav a:hover{ color:var(--text); }
-  nav a:hover::after{ width:100%; }
+  .toggle:hover .chev{ color:var(--text); }
+  .toggle[aria-expanded="true"] .chev{ transform:rotate(180deg); color:var(--text); }
 
-  main{ position:relative; z-index:10; }
-
-  .hero{
-    max-width:1180px;
-    margin:0 auto;
-    padding:120px 56px 140px;
-    display:grid;
-    grid-template-columns:340px 1fr;
-    gap:80px;
-    align-items:center;
-  }
-
-  .frame{
-    position:relative;
-    width:105%; aspect-ratio:1/1;
-    opacity:0; transform:translateY(16px);
-    animation: rise .8s ease forwards .1s;
-  }
-  .frame-inner{
-    position:absolute; inset:14px;
-    background:var(--bg-elevated);
-    border:1px solid var(--line);
-    border-radius: 8px;
-    padding: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  }
-  .frame-inner img{
-    width:100%; height:100%; object-fit:cover;
-    border-radius: 4px;
-    border: 1px solid var(--line);
-    filter:grayscale(35%) contrast(1.05);
-  }
-
-  @keyframes rise{
-    to{ opacity:1; transform:translateY(0); }
-  }
-
-  .about{ min-width:0; }
-  .eyebrow{
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.85rem; letter-spacing:0.08em;
-    color:var(--muted); text-transform:uppercase;
-    margin:0 0 14px;
-    opacity:0; transform:translateY(10px);
-    animation: rise .6s ease forwards .2s;
-  }
-  
-  /* Updated h1 for typing effect */
-  h1{
-    font-family:'IBM Plex Sans', sans-serif;
-    font-weight:500;
-    font-size:clamp(2.2rem, 4vw, 3.4rem);
-    letter-spacing:-0.01em;
-    margin:0 0 22px;
-    min-height:1.2em;
-    display:inline-block;
-    border-right:3px solid var(--accent);
-    padding-right:4px;
-    animation: blink 0.8s step-end infinite;
-  }
-  
-  @keyframes blink {
-    0%, 100% { border-color: transparent; }
-    50% { border-color: var(--accent); }
-  }
-
-  .quote-line{
-    min-height:1.6em;
-    border-left:2px solid var(--line);
-    padding-left:18px;
-    color:var(--muted);
-    font-style:italic;
-    margin-bottom:28px;
-    opacity:0; transform:translateY(10px);
-    animation: rise .6s ease forwards .44s;
-  }
-
-  .bio{
-    min-height:2.4em;
-    color:var(--text);
-    font-size:1rem;
-    line-height:1.75;
-    max-width:56ch;
-    margin-bottom:14px;
-    opacity:0; transform:translateY(10px);
-    animation: rise .6s ease forwards .56s;
-  }
-  .bio + .bio{
-    color:var(--muted);
-    font-size:0.95rem;
-    animation-delay:.66s;
-  }
-
-  .status{
-    display:flex; align-items:center; gap:10px;
-    margin:34px 0 30px;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.95rem;
-    color:var(--muted);
-    opacity:0; transform:translateY(10px);
-    animation: rise .6s ease forwards .78s;
-  }
-  .status .dot{
-    width:8px; height:8px; border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 8px var(--accent);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse{
-    0%,100%{ opacity:1; }
-    50%{ opacity:.35; }
-  }
-
-  .socials{
-    display:flex; gap:18px;
-    opacity:0; transform:translateY(10px);
-    animation: rise .6s ease forwards .9s;
-  }
-  .socials a{
+  /* top-right arrow link */
+  .out{
+    position:relative; flex:none;
+    width:30px; height:30px; border-radius:8px;
     display:inline-flex; align-items:center; justify-content:center;
-    width:44px; height:44px;
-    border:1px solid var(--line);
-    background:var(--bg-elevated);
-    transition:border-color .25s ease, transform .25s ease;
+    color:var(--faint); text-decoration:none;
+    border:1px solid transparent;
+    transition:color .2s ease, background .2s ease, border-color .2s ease;
   }
-  .socials a:hover{
-    border-color:var(--accent);
-    transform:translateY(-3px);
+  .out svg{ transition:transform .2s ease; }
+  .out:hover, .out:focus-visible{
+    color:var(--text); background:var(--surface); border-color:var(--line);
   }
-  .socials img{
-    width:20px; height:20px; object-fit:contain;
-    filter:invert(92%) sepia(6%) saturate(200%);
+  .out:hover svg{ transform:translate(2px,-2px); }
+  .out::after{
+    content:attr(data-label);
+    position:absolute; right:calc(100% + 8px); top:50%;
+    transform:translate(4px,-50%);
+    background:var(--surface); border:1px solid var(--line);
+    color:var(--text); font-family:var(--mono); font-size:0.72rem;
+    padding:4px 8px; border-radius:6px; white-space:nowrap;
+    opacity:0; pointer-events:none;
+    transition:opacity .15s ease, transform .15s ease;
   }
-  .socials a.resume{
-    width:auto; padding:0 16px;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.9rem; font-weight:400;
-    letter-spacing:0.04em;
-    color:var(--text); text-decoration:none;
-  }
+  .out:hover::after, .out:focus-visible::after{ opacity:1; transform:translate(0,-50%); }
 
-  /* below-fold reveal sections */
-  .reveal{
-    max-width:1180px; margin:0 auto;
-    padding:0 56px 120px;
-    display:grid;
-    grid-template-columns:repeat(2, 1fr);
-    gap:24px;
-  }
+  /* dropdown body */
   .panel{
-    border:1px solid var(--line);
-    background:var(--bg-elevated);
-    padding:32px;
-    opacity:0; transform:translateY(24px);
-    transition:opacity .7s ease, transform .7s ease;
+    display:grid; grid-template-rows:0fr;
+    transition:grid-template-rows .3s ease;
   }
-  .panel.in-view{ opacity:1; transform:translateY(0); }
-  .panel .label{
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:1rem; font-weight:500;
-    color:var(--text);
-    margin-bottom:12px;
+  .panel.open{ grid-template-rows:1fr; }
+  .panel > div{ overflow:hidden; }
+  .inner{ padding:0 0 20px; max-width:62ch; }
+  .inner p{ margin:0 0 12px; color:var(--muted); font-size:0.9rem; }
+  .inner p strong{ color:var(--text); font-weight:500; }
+  .tech{
+    display:block; font-family:var(--mono); font-size:0.76rem;
+    color:var(--faint); margin:0 0 12px;
   }
-  .panel .teaser{
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.95rem; color:var(--muted);
-    line-height:1.5; margin:0;
+  .note{ font-style:italic; }
+  .extra{ display:flex; flex-wrap:wrap; gap:8px 18px; margin-top:4px; }
+  .extra a, .inner p a{
+    color:var(--text); font-size:0.85rem; text-decoration:none;
+    border-bottom:1px solid var(--line);
+    transition:border-color .2s ease;
   }
-  .panel a.go{
-    display:inline-block; margin-top:18px;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.9rem; color:var(--muted);
-    text-decoration:none; border-bottom:1px solid var(--line);
-    transition:color .2s ease, border-color .2s ease;
-  }
-  .panel a.go:hover{ color:var(--text); border-color:var(--accent); }
+  .extra a:hover, .inner p a:hover{ border-color:var(--text); }
+
+  /* ---------- load-in ---------- */
+  .rise{ opacity:0; transform:translateY(8px); animation:rise .6s ease forwards; }
+  .rise.d1{ animation-delay:.08s; } .rise.d2{ animation-delay:.16s; } .rise.d3{ animation-delay:.24s; }
+  @keyframes rise{ to{ opacity:1; transform:none; } }
 
   footer{
-    position:relative; z-index:10;
-    border-top:1px solid var(--line);
-    padding:26px 56px;
-    display:flex; justify-content:center;
-    font-family:'IBM Plex Sans', sans-serif;
-    font-size:0.85rem; color:var(--muted);
+    max-width:1040px; margin:0 auto; padding:0 32px 48px;
+    color:var(--faint); font-size:0.8rem;
   }
-  footer a{ color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--line); }
-  footer a:hover{ color:var(--accent); border-color:var(--accent); }
+  footer a{ text-decoration:none; border-bottom:1px solid var(--line); }
+  footer a:hover{ color:var(--text); }
 
-  @media (max-width: 900px){
-    header{ padding:22px 24px; }
-    nav{ gap:24px; }
-    .hero{ grid-template-columns:1fr; padding:80px 24px 90px; text-align:left; }
-    .frame{ max-width:280px; }
-    .reveal{ grid-template-columns:1fr; padding:0 24px 90px; }
+  @media (max-width:860px){
+    .wrap{ grid-template-columns:1fr; gap:48px; padding:48px 20px 64px; }
+    aside{ position:static; }
+    footer{ padding:0 20px 40px; }
+    .date{ display:none; }
+    .out::after{ display:none; }
   }
-
   @media (prefers-reduced-motion: reduce){
     *{ animation:none !important; transition:none !important; }
+    .rise{ opacity:1; transform:none; }
   }
 </style>
 </head>
 <body>
 
-<div class="grid-bg"></div>
+<div class="wrap">
 
-<header>
-  <!-- The href="/" links directly back to the root of your site -->
-  <a href="/" class="logo">acstartup.dev</a>
-  <nav>
-    <a href="/" class="active">Home</a>
-    <a href="projects/">Projects</a>
-    <a href="experience/">Experience</a>
-  </nav>
-</header>
-
-<main>
-  <section class="hero">
-    <div class="frame">
-      <div class="frame-inner">
-        <img src="files/me.jpg" alt="Aiden Chen">
-      </div>
+  <!-- ===== sidebar: me + connect ===== -->
+  <aside>
+    <div class="me rise">
+      <img src="files/me.jpg" alt="Aiden Chen">
+      <h1>Aiden Chen</h1>
+      <p class="sub">CS &amp; Statistics at the University of Michigan</p>
+      <p class="bio">I focus on applied data analytics and software engineering, using data to tackle ambiguous problems and deliver actionable insights.</p>
+      <p class="bio">Outside of engineering: endurance running, lifting, road trips, skydiving, and midnight treks with friends.</p>
     </div>
 
-    <div class="about">
-      <p class="eyebrow">Recruiting for Summer 2027 Data Analyst &amp; SWE Internships</p>
-      
-      <!-- H1 is now empty to accommodate the typewriter effect -->
-      <h1 id="typewriter">&nbsp;</h1>
-      
-      <p class="bio">I am currently a student at the University of Michigan–Ann Arbor pursuing a dual major in Computer Science and Statistics. My focus and enthusiasm is on applied data analytics, using data to tackle ambiguous problems and deliver actionable insights as well as software engineering and development. This is my personal website, where I share my projects and experiences.</p>
-      <p class="bio">Apart from engineering, I love endurance running, lifting, and spontaneous things like roadtrips, skydiving, and midnight treks with friends.</p>
+    <div class="connect rise d1" id="connect">
+      <h2>Let's connect</h2>
+      <p>Always happy to chat about data, startups, or whatever you're building.</p>
+      <a class="btn" href="https://calendar.app.google/3oBbMhH6U7rTBEyA6" target="_blank" rel="noopener noreferrer">
+        Book a coffee chat
+        <svg width="16" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg>
+      </a>
+      <ul class="links">
+        <li><a href="mailto:aidench@umich.edu">Email <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
+        <li><a href="https://www.linkedin.com/in/acstartup/" target="_blank" rel="noopener noreferrer">LinkedIn <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
+        <li><a href="https://github.com/acstartup" target="_blank" rel="noopener noreferrer">GitHub <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
+        <li><a href="https://x.com/aidencstartup" target="_blank" rel="noopener noreferrer">X <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
+        <li><a href="files/Aiden_Chen_Resume.pdf" target="_blank" rel="noopener noreferrer">Resume <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a></li>
+      </ul>
+    </div>
+  </aside>
 
-      <div class="socials">
-        <a href="mailto:aidench@umich.edu" aria-label="Email">
-          <img src="files/email.png" alt="Email">
-        </a>
-        <a href="https://www.linkedin.com/in/acstartup/" aria-label="LinkedIn">
-          <img src="files/linkedin.png" alt="LinkedIn">
-        </a>
-        <a href="https://github.com/acstartup" aria-label="GitHub">
-          <img src="files/github.png" alt="GitHub">
-        </a>
-        <a class="resume" href="files/Aiden_Chen_Resume.pdf" target="_blank" rel="noopener">Resume</a>
-      </div>
-    </div>
-  </section>
+  <!-- ===== main column ===== -->
+  <main>
 
-  <section class="reveal">
-    <div class="panel">
-      <div class="label">Projects</div>
-      <p class="teaser">Explore the tools, ideas, and systems I've been exploring and building.</p>
-      <a class="go" href="/projects">View projects →</a>
-    </div>
-    <div class="panel">
-      <div class="label">Experience</div>
-      <p class="teaser">View my background in data analysis, technical research, and software development.</p>
-      <a class="go" href="/experience">View experience →</a>
-    </div>
-  </section>
-</main>
+    <section id="experience" class="rise d2">
+      <h2 class="section-label">Experience</h2>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-aelp">
+            <span class="text"><span class="title">Data Engineering Consultant</span><span class="org">American Economic Liberties Project (via Michigan Data Consulting)</span></span>
+            <span class="date">Oct 2026 – Present</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://www.economicliberties.us/" target="_blank" rel="noopener noreferrer" data-label="economicliberties.us" aria-label="American Economic Liberties Project website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-aelp"><div><div class="inner">
+          <span class="tech">Python · SQL · ETL · CourtListener API · SEC EDGAR API · Ann Arbor, MI</span>
+          <p>Designing a relational schema and backend to replace AELP's static Big Tech Abuse Tracker (200+ entries, 5 companies), scaling to 25+ corporations with 6 filter dimensions (including 8 harm categories and 5 jurisdictions) and 3 sort orders.</p>
+          <p>Building Python and SQL ETL pipelines that normalize news articles into categorized company records joined with CourtListener and SEC EDGAR API data, plus intake for a public antitrust-reporting questionnaire, so staff can keep it current.</p>
+        </div></div></div>
+      </article>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-unitnode">
+            <span class="text"><span class="title">Co-Founder &amp; CTO</span><span class="org">UnitNode</span></span>
+            <span class="date">Dec 2024 – Nov 2025</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://unitnode.com/" target="_blank" rel="noopener noreferrer" data-label="unitnode.com" aria-label="UnitNode website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-unitnode"><div><div class="inner">
+          <span class="tech">SQL (PostgreSQL/Supabase) · TypeScript · Python · Vercel · APIs · Mullica Hill, NJ</span>
+          <p>UnitNode aimed to be the first real estate operations software that replaces outsourced property management with automation and simplicity for owners, helping them increase rental income margins, boost efficiency, and regain control of their portfolio effortlessly.</p>
+          <p>As a co-founder, I built end-to-end data workflows for properties, leases, bills, and payments on PostgreSQL (Supabase), including an email-parsing pipeline that turns unstructured utility emails into structured tenant bills with due dates, feeding Stripe billing. I also implemented payments with the Stripe API, built automation features like translated tenant alerts, and contributed across the stack on database UI/UX design, authentication, integrations, testing/bug fixes, and deployment, while providing on-call support. I conducted user interviews with property management firms and individual homeowners, and iterating on their weekly feedback helped grow the platform to manage 1,900+ properties and 40+ owners across multiple states within 8 months.</p>
+        </div></div></div>
+      </article>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-njgset">
+            <span class="text"><span class="title">Research Scholar, Data-Flow Analysis &amp; Benchmarking</span><span class="org">NJ Governor's School of Engineering &amp; Technology</span></span>
+            <span class="date">Jun 2025 – Oct 2025</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://soe.rutgers.edu/academics/pre-college-engineering-programs/new-jersey-governors-school-engineering-and-technology" target="_blank" rel="noopener noreferrer" data-label="soe.rutgers.edu" aria-label="NJGSET program page"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-njgset"><div><div class="inner">
+          <span class="tech">Python · Pytest · PyPI · LaTeX · Figma · New Brunswick, NJ</span>
+          <p>Accepted as a Scholar among the top 64 New Jersey high school students with a less than 1% acceptance rate (ranked New Jersey's #1 STEM summer program). Completed undergraduate-level coursework in Modern Physics, Robotics, Sustainable Energy, and AI/ML Engineering.</p>
+          <p>Built a Python-based emotional support assistant using the Gemini API, designed to simulate conversations with specific individuals by grounding responses in publicly available information. Helped develop the initial 15-page paper, “TaintMonkey: Dynamic Taint Analysis of Python Web Applications Using Monkey Patching,” published in the NJGSET Research Paper Archive and presented at the NJGSET 2025 Symposium. Also placed 2nd of 16 teams in the program's robotics competition with a custom IR-sensor and autonomous grid-lapping algorithm.</p>
+          <div class="extra">
+            <a href="https://drive.google.com/file/d/1H3-AcJWlBV2stjgsefnRC3_fEwS-BlX1/view" target="_blank" rel="noopener noreferrer">NJGSET 2025 publication ↗</a>
+            <a href="#p-taintmonkey" data-open="p-taintmonkey">Later presented at MIT URTC 2025 (see Projects) ↓</a>
+          </div>
+        </div></div></div>
+      </article>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-homevista">
+            <span class="text"><span class="title">Data Engineering &amp; Automation Intern</span><span class="org">Home Vista Realty</span></span>
+            <span class="date">Jun 2024 – Sep 2024</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://homevistarealty.com/" target="_blank" rel="noopener noreferrer" data-label="homevistarealty.com" aria-label="Home Vista Realty website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-homevista"><div><div class="inner">
+          <span class="tech">Python · Excel · OpenAI API · Philadelphia, PA</span>
+          <p>Built a 1,160+ property database across New Jersey and Pennsylvania and developed an OpenAI API–powered analyzer for Philadelphia Water Department billing reports, cross-referencing month-by-month data. Using that data, I identified the water-cost threshold at which tenants began missing payments, flagged properties approaching that threshold, and targeted the 12 highest-risk Philadelphia homes, partnering with local contractors to replace outdated utility systems with low-waste solutions.</p>
+        </div></div></div>
+      </article>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-mathnasium">
+            <span class="text"><span class="title">Mathematics Tutor</span><span class="org">Mathnasium</span></span>
+            <span class="date">Apr 2025 – Aug 2026</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://www.mathnasium.com/" target="_blank" rel="noopener noreferrer" data-label="mathnasium.com" aria-label="Mathnasium website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-mathnasium"><div><div class="inner">
+          <span class="tech">Mullica Hill, NJ</span>
+          <p>Tutored students aged 4 to 18 in subjects ranging from addition to Calculus II and Statistics.</p>
+          <p>Worked alongside multiple instructors while teaching 7–8 students at once. Collaborated with fellow college and post-graduate instructors to plan, create, and finalize center learning plans for Algebra I and Geometry.</p>
+        </div></div></div>
+      </article>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-wish">
+            <span class="text"><span class="title">Barista</span><span class="org">Mr. Wish</span></span>
+            <span class="date">Jun 2026 – Aug 2026</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://mrwishusa.com/" target="_blank" rel="noopener noreferrer" data-label="mrwishusa.com" aria-label="Mr. Wish website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-wish"><div><div class="inner">
+          <span class="tech">Deptford, NJ</span>
+          <p>Prepared and served a variety of bubble tea, smoothie, and fresh juice drinks, following recipes to ensure consistent quality during high-volume shifts.</p>
+          <p>Operated the POS system, handled cash and card transactions, and kept the workstation clean and organized to comply with food safety standards.</p>
+        </div></div></div>
+      </article>
+
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="e-princeton">
+            <span class="text"><span class="title">Research Intern</span><span class="org">Princeton University</span></span>
+            <span class="date">Jun 2023</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://www.princeton.edu/" target="_blank" rel="noopener noreferrer" data-label="princeton.edu" aria-label="Princeton University website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="e-princeton"><div><div class="inner">
+          <span class="tech">Princeton, NJ</span>
+          <p>Assisted in mathematical research under a 2021 PAEMST (Presidential Award for Excellence in Mathematics and Science Teaching) Awardee.</p>
+          <p>Took PhD-level lectures on Astrophysics, String Theory, and Probability under Institute for Advanced Study-backed scholars.</p>
+        </div></div></div>
+      </article>
+    </section>
+
+    <section id="projects" class="rise d3">
+      <h2 class="section-label">Projects</h2>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="p-churn">
+            <span class="text"><span class="title">E-Commerce Churn Analysis &amp; Pricing Strategy</span><span class="org">ML prediction modeling &amp; CLV optimization</span></span>
+            <span class="date">Jul 2026 – Aug 2026</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://github.com/acstartup/ecommerce-churn-analytics-clv-strategy" target="_blank" rel="noopener noreferrer" data-label="github.com/acstartup" aria-label="Churn analysis on GitHub"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="p-churn"><div><div class="inner">
+          <span class="tech">Python (scikit-learn, Pandas, NumPy) · SQL · Tableau</span>
+          <p class="note">Under NDA until W27.</p>
+          <p>Built as a trial project for a national gym franchise, using a public e-commerce churn dataset as a stand-in for their member data. Subscription churn mechanics transfer directly: recurring revenue, cancellation as the target event, and promotional elasticity all behave the same way. The work led to a paid engagement scheduled for Winter 2027.</p>
+          <p>Developed an end-to-end churn analytics and price elasticity framework evaluating $1M+ in at-risk Customer Lifetime Value (LTV) across nearly 18,000 e-commerce transaction records. Benchmarked baseline Logistic Regression against an ensemble Random Forest Classifier (0.922 ROC-AUC), flagging 76.2% of at-risk churners with 94.2% precision prior to account cancellation.</p>
+          <p>Uncovered root causes through correlation analysis, identifying customer support calls (12.8% importance, +0.288 correlation) and checkout cart abandonment (8.5% importance, +0.251 correlation) as primary churn drivers. Formulated a MECE-based strategy modeling three promotional scenarios (5%, 10%, 20%), finding that a targeted 10% promotion maximized profit, protecting $50K in revenue (~50% ROI) while preventing margin loss.</p>
+          <div class="extra">
+            <a href="https://github.com/acstartup/ecommerce-churn-analytics-clv-strategy" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://public.tableau.com/views/E-CommerceChurnAnalysisCLVStrategy/E-commerceChurnAnalysisCLVStrategy?:language=en-US&publish=yes&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" target="_blank" rel="noopener noreferrer">Live on Tableau Public ↗</a>
+          </div>
+        </div></div></div>
+      </article>
+
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="p-mna">
+            <span class="text"><span class="title">M&amp;A SME Financial Analysis</span><span class="org">10-year baseline &amp; 5-year projections</span></span>
+            <span class="date">Jun 2026 – Jul 2026</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://github.com/acstartup/mna-valuation-forecasting-analysis" target="_blank" rel="noopener noreferrer" data-label="github.com/acstartup" aria-label="M&A analysis on GitHub"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="p-mna"><div><div class="inner">
+          <span class="tech">Excel · SQL · Tableau</span>
+          <p>Developed a comprehensive financial model for a small-medium enterprise ($40.8M+ total revenue), analyzing its 10-year historical performance (2015–2025, including 2026 projections) and forecasting a 5-year trajectory across three macroeconomic scenarios (Bull, Base, Bear). Used Excel for initial data structuring and profit calculations, SQL for KPI aggregation (CAGR, margin trends), and Tableau Public for interactive visualization.</p>
+          <p>Provided data-driven M&amp;A recommendations, advising the client to pivot from top-line expansion to disciplined cost control. I recommended a three-year margin improvement phase prior to pursuing an exit, to improve financial health and present a more attractive, profitable asset to potential acquirers.</p>
+          <div class="extra">
+            <a href="https://github.com/acstartup/mna-valuation-forecasting-analysis" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://public.tableau.com/app/profile/aiden.chen4958/viz/MAValuationFinancialForecast/Dashboard1?publish=yes" target="_blank" rel="noopener noreferrer">Live on Tableau Public ↗</a>
+          </div>
+        </div></div></div>
+      </article>
+
+      <article class="item" id="taintmonkey">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="p-taintmonkey">
+            <span class="text"><span class="title">TaintMonkey</span><span class="org">Dynamic taint analysis of Python web apps · IEEE Xplore</span></span>
+            <span class="date">Jul 2025 – Oct 2025</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://github.com/bliutech/TaintMonkey" target="_blank" rel="noopener noreferrer" data-label="github.com/bliutech" aria-label="TaintMonkey on GitHub"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="p-taintmonkey"><div><div class="inner">
+          <span class="tech">Python · Pytest · PyPI · LaTeX · Figma · Cambridge, MA</span>
+          <p><strong>Researcher &amp; publication co-author.</strong> TaintMonkey is a dynamic taint analysis library for Python Flask apps that uses monkey patching to instrument endpoints without changing source code. It includes a built-in fuzzer and plugin workflow to generate randomized inputs and detect vulnerabilities when tainted data reaches dangerous sinks without proper sanitization. The repo also ships with JungleGym, a CWE-labeled benchmark dataset of 118 vulnerable Flask apps.</p>
+          <p>The project began at NJ GSET 2025 and was later presented at MIT URTC 2025 and published in IEEE Xplore. I built 32 of the 118 JungleGym apps along with their vulnerability plugins, added JSON-input tainting support, fixed major GitHub issues affecting data-flow tracking, and contributed to debugging and core architectural decisions. I also wrote the Experimental Procedures section of the paper, designed all research figures in Figma, formatted the manuscript in Overleaf, and created the 13-slide deck presented at MIT URTC 2025. Throughout, I coordinated deadlines and kept the team on pace.</p>
+          <div class="extra">
+            <a href="https://github.com/bliutech/TaintMonkey" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+            <a href="https://ieeexplore.ieee.org/document/11533009" target="_blank" rel="noopener noreferrer">MIT URTC 2025 publication ↗</a>
+          </div>
+        </div></div></div>
+      </article>
+    </section>
+
+    <section id="education" class="rise d3">
+      <h2 class="section-label">Education</h2>
+      <article class="item">
+        <div class="row">
+          <button class="toggle" aria-expanded="false" aria-controls="ed-umich">
+            <span class="text"><span class="title">University of Michigan</span><span class="org">B.S. in Computer Science and Statistics</span></span>
+            <span class="date">Ann Arbor, MI</span>
+            <svg class="chev" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg>
+          </button>
+          <a class="out" href="https://umich.edu/" target="_blank" rel="noopener noreferrer" data-label="umich.edu" aria-label="University of Michigan website"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 11l6-6M6 5h5v5"/></svg></a>
+        </div>
+        <div class="panel" id="ed-umich"><div><div class="inner">
+          <p><strong>Extracurriculars:</strong> <a href="https://www.michigandataconsulting.org" target="_blank" rel="noopener noreferrer">Michigan Data Consulting</a>, <a href="https://iotaumich.org" target="_blank" rel="noopener noreferrer">Iota Omega Epsilon Professional Fraternity</a></p>
+          <p><strong>Relevant coursework:</strong> Discrete Mathematics, Programming &amp; Intro to Data Structures (C++)</p>
+        </div></div></div>
+      </article>
+    </section>
+
+  </main>
+</div>
 
 <footer>
-  <span>acstartup.dev is hosted on&nbsp;</span>
-  <a href="https://github.com/acstartup/acstartup.dev">GitHub Pages</a>
+  Built by hand with HTML &amp; CSS · <a href="https://github.com/acstartup/acstartup.dev" target="_blank" rel="noopener noreferrer">Source on GitHub</a>
 </footer>
 
 <script>
-  // Intersection Observer for the panels
-  const panels = document.querySelectorAll('.panel');
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('in-view');
-        io.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.2 });
-  panels.forEach(p => io.observe(p));
-
-  // Typewriter effect script
-  const text = "Hey, I'm Aiden Chen!";
-  const speed = 85; // Typing speed in milliseconds
-  let i = 0;
-  const element = document.getElementById("typewriter");
-  
-  function typeWriter() {
-    // Clear the non-breaking space right before typing starts
-    if (i === 0) element.innerHTML = ""; 
-    
-    if (i < text.length) {
-      element.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typeWriter, speed);
-    } else {
-      // Remove the blinking cursor 2 seconds after typing finishes
-      setTimeout(() => {
-        element.style.borderRight = "none";
-        element.style.animation = "none";
-      }, 1400);
-    }
+  function setOpen(btn, open){
+    btn.setAttribute('aria-expanded', open);
+    document.getElementById(btn.getAttribute('aria-controls')).classList.toggle('open', open);
   }
 
-  // Starts the typing effect after a 300ms delay to match the page load
-  setTimeout(typeWriter, 300);
+  document.querySelectorAll('.toggle').forEach(btn => {
+    btn.addEventListener('click', () => setOpen(btn, btn.getAttribute('aria-expanded') !== 'true'));
+  });
+
+  // in-page links that open a specific row (e.g. NJGSET -> TaintMonkey)
+  document.querySelectorAll('[data-open]').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      const btn = document.querySelector('[aria-controls="' + link.dataset.open + '"]');
+      setOpen(btn, true);
+      btn.scrollIntoView({ behavior:'smooth', block:'center' });
+    });
+  });
 </script>
 
 </body>

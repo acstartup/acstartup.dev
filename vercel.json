@@ -1,5 +1,13 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": ".",
-  "installCommand": "npm install"
+  "installCommand": "npm install",
+  "redirects": [
+    { "source": "/projects", "destination": "/#projects", "permanent": true },
+    { "source": "/projects/(.*)", "destination": "/#projects", "permanent": true },
+    { "source": "/experience", "destination": "/#experience", "permanent": true },
+    { "source": "/experience/(.*)", "destination": "/#experience", "permanent": true },
+    { "source": "/contact", "destination": "/#connect", "permanent": true },
+    { "source": "/contact/(.*)", "destination": "/#connect", "permanent": true }
+  ]
 }
